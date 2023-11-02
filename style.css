@@ -56,6 +56,7 @@ h1{
   background-position: center;
   background-repeat: no-repeat;
   background-attachment:scroll;
+  border-radius: 12px;
 
 
 }
@@ -80,11 +81,16 @@ ion-icon {
 
 section{
   margin-top: -1%;
-  background-color: rgb(51, 51, 51);
+  background-image:url("ARISE_BG2.png");
   justify-content:center;
   align-items: center;
-  height: 100vh;
+  height: 50vh;
   color:white;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
 }
 
 .reveal{
@@ -97,4 +103,20 @@ section{
 .reveal.active{
   transform: translateY(0px);
   opacity:1;
+}
+
+.homeSection{
+
+  background: white;
+  color:black;
+  text-indent:10px;
+  border-radius: 12px;
+  word-break: normal;
+  padding:1%;
+  width: 50%;
+  display: inline-block;
+  margin: auto;
+  position: fixed;
+    left: 0;
+    right: 0;
 }
