@@ -140,10 +140,11 @@ section{
   border-radius: 12px;
   word-break: normal;
   padding:1%;
-  width: 50%;
+  width: 60%;
   display: inline-block;
   margin: auto;
   position: fixed;
     left: 0;
     right: 0;
+    overflow: hidden;
 }
