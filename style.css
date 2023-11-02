@@ -94,13 +94,15 @@ section{
   background-image:url("ARISE_BG.png");
   justify-content:center;
   align-items: center;
-  height: 55vh;
+  height: 80vh;
   color:white;
   background-position:center;
   background-repeat:no-repeat;
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
+  margin-bottom: -5px;
+  display: block;
 }
 
 .reveal{
@@ -140,11 +142,37 @@ section{
   border-radius: 12px;
   word-break: normal;
   padding:2%;
-  width: 60%;
-  display: inline-block;
+  width: 65%;
+  display: block;
   margin: auto;
   position: fixed;
     left: 0;
     right: 0;
     overflow: hidden;
-}
+  }
+  h1{
+    font-size: 3em;
+  }
+  p{
+    font-size:large;
+  }
+  @media(max-width: 991px){
+    p{
+      font-size:medium;
+    } 
+    section{
+      margin-top: -1%;
+      background-image:url("ARISE_BG.png");
+      justify-content:center;
+      align-items: center;
+      height: 100vh;
+      color:white;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      width: 100%;
+      margin-bottom: -5px;
+      display: block;
+    }
+  }
