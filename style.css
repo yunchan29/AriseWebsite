@@ -134,12 +134,12 @@ section{
 
 .homeSection{
 
-  background: rgba(13, 13, 100, 0.6);
-  color:white;
+  background: rgba(220, 220, 255);
+  color:black;
   text-indent:10px;
   border-radius: 12px;
   word-break: normal;
-  padding:1%;
+  padding:2%;
   width: 60%;
   display: inline-block;
   margin: auto;
