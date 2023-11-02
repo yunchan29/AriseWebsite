@@ -7,6 +7,16 @@
   background-repeat: no-repeat;
   background-attachment:scroll;
 }
+.background2{
+  background: url("ARISE_BG2.png");
+  width:100%;
+  height:100vh;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment:scroll;
+}
+
 
 
 @media(max-width: 991px){
@@ -81,10 +91,10 @@ ion-icon {
 
 section{
   margin-top: -1%;
-  background-image:url("ARISE_BG2.png");
+  background-image:url("ARISE_BG.png");
   justify-content:center;
   align-items: center;
-  height: 50vh;
+  height: 55vh;
   color:white;
   background-position:center;
   background-repeat:no-repeat;
@@ -95,20 +105,37 @@ section{
 
 .reveal{
   position:relative;
-  transform:translateY(150px);
+  transform:translateX(-100%);
+  filter:blur(5px);
   opacity:0;
-  transition:all 2s ease;
+  transition:all 1.5s ease;
 }
 
 .reveal.active{
-  transform: translateY(0px);
+  transform: translateX(0);
+  filter: blur(0);
   opacity:1;
 }
 
+.reveal2{
+  position:relative;
+  transform:translateX(100%);
+  filter:blur(5px);
+  opacity:0;
+  transition:all 1.5s ease;
+}
+
+.reveal2.active{
+  transform: translateX(0);
+  filter: blur(0);
+  opacity:1;
+}
+
+
 .homeSection{
 
-  background: white;
-  color:black;
+  background: rgba(13, 13, 100, 0.6);
+  color:white;
   text-indent:10px;
   border-radius: 12px;
   word-break: normal;
