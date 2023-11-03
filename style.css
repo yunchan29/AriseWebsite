@@ -198,3 +198,12 @@ section{
     border-radius: 10px;
     
   }
+  .memberRegistration{
+    background:rgb(0, 1, 69,.3);
+    width:50%;
+    border-radius: 12px;
+    margin:auto;
+    color:white;
+    padding:1%;
+    z-index: 1;
+  }

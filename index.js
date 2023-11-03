@@ -31,3 +31,12 @@ document.body.addEventListener('scroll', (e) => {
     }
     }
 });
+
+
+
+
+function danilo(){
+  let Email=document.getElementById("email").value;
+  let test=document.getElementById("testing");
+  test.textContent="Hello";
+}
