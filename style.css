@@ -41,6 +41,7 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
+    scroll-snap-type: y mandatory;
 }
 .header{
   padding:1%;
@@ -175,6 +176,7 @@ section{
       margin-bottom: -5px;
       display: block;
       scroll-snap-align: start;
+      scroll-snap-stop: normal;
     }
   }
 
