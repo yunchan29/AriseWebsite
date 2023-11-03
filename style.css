@@ -176,3 +176,12 @@ section{
       display: block;
     }
   }
+
+  .sm-icons{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sm-icons .nav-link{
+    padding-right: 1em;
+  }
