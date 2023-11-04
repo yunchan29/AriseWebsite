@@ -52,7 +52,7 @@ function register() {
       // };
 
       console.log("Registration successful");
-      alert('User Created');
+      alert('Registration successful!');
 
       // Save user data to the database
       // database_ref.child('users/' + user.uid).set(user_data);
