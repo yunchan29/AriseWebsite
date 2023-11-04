@@ -196,14 +196,27 @@ section{
     backdrop-filter: blur( 2px );
     -webkit-backdrop-filter: blur( 0px );
     border-radius: 10px;
+  
     
   }
   .memberRegistration{
     background:rgb(0, 1, 69,.3);
-    width:50%;
+    
     border-radius: 12px;
-    margin:auto;
     color:white;
     padding:1%;
     z-index: 1;
+    width:50%;
+   display:grid;
+   place-items: center;
+   margin:auto;
+   
   }
+.divider{
+  background-color: transparent;
+  height:100px;
+}
+
+#passwordHelpBlock{
+  color:white;
+}
