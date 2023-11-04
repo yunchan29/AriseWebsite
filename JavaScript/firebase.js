@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+import { getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database
 const auth = getAuth(app);
 const database = getDatabase(app);
+
 
 // Wait for the DOM to load before attaching the click event
 document.addEventListener("DOMContentLoaded", function () {
@@ -44,18 +45,19 @@ function register() {
       var user = userCredential.user;
 
       // // Add user to the database
-      // var database_ref = database.ref();
-      // var user_data = {
-      //   email: email,
-      //   password: password,
-      //   last_login: Date.now(),
-      // };
+      function writeUserData(email, password) {
+        const db = getDatabase();
+        set(ref(db, 'users/' + uid), {
+          email: email,
+          password:password,
+        });
+      }
 
       console.log("Registration successful");
       alert('Registration successful!');
-
+        
       // Save user data to the database
-      // database_ref.child('users/' + user.uid).set(user_data);
+      
     })
     .catch(function (error) {
       var error_code = error.code;
