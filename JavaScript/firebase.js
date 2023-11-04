@@ -56,9 +56,9 @@ function register() {
 
       console.log("Registration successful");
       alert('Registration successful!');
-      
+      var myModal = document.getElementById('myModal');
+
       // Save user data to the database
-      
     })
     .catch(function (error) {
       var error_code = error.code;
