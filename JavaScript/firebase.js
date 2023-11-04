@@ -51,13 +51,17 @@ function register() {
         //set(ref(db, 'users/' + uid), {
          // email: email,
           //password:password,
+          //profile_pic: imageUrl,
        // });
       //}
+      // Assuming your modal has an id of "myModal"
+var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
-      console.log("Registration successful");
-      alert('Registration successful!');
-      var myModal = document.getElementById('myModal');
+// Open the modal
+myModal.show();
 
+   
+  
       // Save user data to the database
     })
     .catch(function (error) {
