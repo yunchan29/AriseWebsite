@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database
 const auth = getAuth(app);
 const database = getDatabase(app);
+//Auth-state listener
 
 
 // Wait for the DOM to load before attaching the click event
@@ -45,17 +46,17 @@ function register() {
       var user = userCredential.user;
       
       // // Add user to the database
-      function writeUserData(email, password) {
-        const db = getDatabase();
-        set(ref(db, 'users/' + uid), {
-          email: email,
-          password:password,
-        });
-      }
+      //function writeUserData(email, password) {
+        //const db = getDatabase();
+        //set(ref(db, 'users/' + uid), {
+         // email: email,
+          //password:password,
+       // });
+      //}
 
       console.log("Registration successful");
       alert('Registration successful!');
-        writeUserData();
+      
       // Save user data to the database
       
     })
