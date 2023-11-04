@@ -43,7 +43,7 @@ function register() {
   createUserWithEmailAndPassword(auth, email, password)
     .then(function (userCredential) {
       var user = userCredential.user;
-
+      
       // // Add user to the database
       function writeUserData(email, password) {
         const db = getDatabase();
@@ -55,7 +55,7 @@ function register() {
 
       console.log("Registration successful");
       alert('Registration successful!');
-        
+        writeUserData();
       // Save user data to the database
       
     })
