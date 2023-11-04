@@ -1,4 +1,5 @@
-// index.js
+// firebase.js
+document.getElementById('testing').textContent=("Javascript is working!");
 
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
@@ -7,14 +8,14 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth
 import { getDatabase} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 // Your Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDde8OK0fHYx01cwk-QPB0LzIECoRL6K0w",
-    authDomain: "arise-esports.firebaseapp.com",
-    projectId: "arise-esports",
-    storageBucket: "arise-esports.appspot.com",
-    messagingSenderId: "546807423163",
-    appId: "1:546807423163:web:bea33e7c6f45672a45c99e",
-    measurementId: "G-EY02T4CGX4"
-  };
+  apiKey: "AIzaSyDde8OK0fHYx01cwk-QPB0LzIECoRL6K0w",
+  authDomain: "arise-esports.firebaseapp.com",
+  projectId: "arise-esports",
+  storageBucket: "arise-esports.appspot.com",
+  messagingSenderId: "546807423163",
+  appId: "1:546807423163:web:bea33e7c6f45672a45c99e",
+  measurementId: "G-EY02T4CGX4"
+};
 
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
