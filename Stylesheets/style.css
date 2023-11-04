@@ -1,5 +1,5 @@
 .background{
-  background: url("ARISE_COVER.png");
+  background: url("/Pictures/ARISE_COVER.png");
   width:100%;
   height:100vh;
   background-size: cover;
@@ -8,7 +8,7 @@
   background-attachment:scroll;
 }
 .background2{
-  background: url("ARISE_BG2.png");
+  background: url("/Pictures/ARISE_BG2.png");
   width:100%;
   height:100vh;
   background-size: cover;
@@ -58,7 +58,7 @@ h1{
 }
 
 .headerBackground{
-  background-image: url(ARISE_COVER.png);
+  background-image: url("/Pictures/ARISE_BG2.png");
   background-attachment: fixed;
   background-size: cover;
   border-radius: 20px;
@@ -92,7 +92,7 @@ ion-icon {
 
 section{
   margin-top: -1%;
-  background-image:url("ARISE_BG.png");
+  background-image:url("/Pictures/ARISE_BG.png");
   justify-content:center;
   align-items: center;
   height: 80vh;
@@ -163,7 +163,7 @@ section{
     } 
     section{
       margin-top: -1%;
-      background-image:url("ARISE_BG.png");
+      background-image:url("/Pictures/ARISE_BG.png");
       justify-content:center;
       align-items: center;
       height: 100vh;
