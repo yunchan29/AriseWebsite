@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database
 const auth = getAuth(app);
 const database = getDatabase(app);
+
 //Auth-state listener
 
 
@@ -47,14 +48,21 @@ function register() {
       
       // // Add user to the database
       //function writeUserData(email, password) {
-        //const db = getDatabase();
-        //set(ref(db, 'users/' + uid), {
-         // email: email,
-          //password:password,
-          //profile_pic: imageUrl,
-       // });
-      //}
-      // Assuming your modal has an id of "myModal"
+        
+
+// Add data to a collection
+//db.collection("yourCollection").add({
+ // email: email,
+ // password:password,
+//})
+//then((docRef) => {
+  //console.log("Document written with ID: ", docRef.id);
+//})
+//.catch((error) => {
+  //console.error("Error adding document: ", error);
+//});
+  //  }
+    //writeUserData();
 var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
 // Open the modal
@@ -85,3 +93,4 @@ function validate_password(password) {
 function validate_field(field) {
   return field != null && field.length > 0;
 }
+
