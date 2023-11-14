@@ -7,7 +7,6 @@
   background-repeat: no-repeat;
   background-attachment:fixed;
   z-index: 10;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
  
 }
 
@@ -146,7 +145,7 @@ section{
   background: rgba(220, 220, 255);
   color:black;
   text-indent:10px;
-  border-radius: 12px;
+  border-radius: 5px;
   word-break: normal;
   padding:2%;
   width: 65%;
@@ -156,6 +155,7 @@ section{
     left: 0;
     right: 0;
     overflow: hidden;
+
   }
   h1{
     font-size: 3em;
@@ -245,9 +245,6 @@ section{
 
 .aboutSection{
 background-color: black;
-margin-top: -20%;
+
 }
 
-.aboutSection:before{
-  transform: skewY(10deg);
-}
