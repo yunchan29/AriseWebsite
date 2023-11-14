@@ -248,3 +248,11 @@ background-color: black;
 
 }
 
+.news{
+  background: linear-gradient(-20deg, #002741 0%, #11004c 100%);
+  color:white;
+  text-align: center;
+  padding:10px;
+  border-radius: 12px;
+}
+
