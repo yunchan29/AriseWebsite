@@ -250,14 +250,14 @@ background-color: black;
 }
 
 .news{
-  background-color: black;
+  background:rgba(33, 1, 77);
   color:rgb(214, 214, 214);
   text-align: center;
   padding:10px;
   border-color: white;
   margin: top -1px;
   overflow: hidden;
-  
+  backdrop-filter: blur(5px);
 }
 
 
@@ -334,5 +334,31 @@ display:flex;
 }
 
 .custom-shape-divider-bottom-1700031327 .shape-fill {
-fill: black;
+fill: rgba(33, 1, 77);
+}
+
+
+
+
+/* CSS */
+.button-34 {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
 }
