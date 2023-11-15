@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Lato&display=swap');
 .background{
   background: url("/Pictures/ARISE_COVER.png");
   width:100%;
@@ -47,6 +48,7 @@ html,body
     padding: 0px;
     overflow-x: hidden; 
     margin-right: 0px !important;
+    font-family: 'Alegreya', serif;
  
 }
 .header{
@@ -265,7 +267,13 @@ background-color: black;
   background: rgba(0, 0, 0, 0.566);
   text-align: center;
   backdrop-filter: blur(7px);
+
+  justify-content: center;
+  align-items:center;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  display: flex;
 }
 
 .back-video{
@@ -281,6 +289,7 @@ background-color: black;
   .back-video{
     width:105%;
     height:auto;
+    object-fit:cover;
   }
 }
 
@@ -288,7 +297,14 @@ background-color: black;
   .back-video{
     width:auto;
     height:100%;
+    object-fit:cover;
   }
+}
+@media(max-width:991px){
+.back-video{
+  object-fit:cover;
+ 
+}
 }
 
 .headerText{
@@ -316,7 +332,7 @@ display:flex;
   }
 }
 
-.custom-shape-divider-bottom-1700031327 {
+.custom-shape-divider-bottom-1700048645 {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -326,19 +342,16 @@ display:flex;
   transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1700031327 svg {
+.custom-shape-divider-bottom-1700048645 svg {
   position: relative;
   display: block;
-  width: calc(164% + 1.3px);
-  height: 135px;
+  width: calc(300% + 1.3px);
+  height: 80px;
 }
 
-.custom-shape-divider-bottom-1700031327 .shape-fill {
-fill: rgba(33, 1, 77);
+.custom-shape-divider-bottom-1700048645 .shape-fill {
+  fill: rgba(33, 1, 77);
 }
-
-
-
 
 /* CSS */
 .button-34 {
