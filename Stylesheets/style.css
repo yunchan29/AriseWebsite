@@ -324,11 +324,15 @@ background-color: black;
 .headerContainer{
 display:flex;
 }
+.headerImage{
+  width:40%;
+}
 
-@media(max-width:991px)
+@media(max-width:870px)
 {
   .headerContainer{
     display: inline;
+    width:30rem;
   }
 }
 
