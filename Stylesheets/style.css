@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Caveat&family=Lato&display=swap');
 .background{
   background: url("/Pictures/ARISE_COVER.png");
   width:100%;
@@ -324,9 +324,7 @@ background-color: black;
 .headerContainer{
 display:flex;
 }
-.headerImage{
-  width:40%;
-}
+
 
 @media(max-width:870px)
 {
@@ -378,4 +376,10 @@ display:flex;
   width: fit-content;
   word-break: break-word;
   border: 0;
+}
+
+
+.cursiveFont{
+  font-family: 'Caveat', cursive;
+  font-size:4vw;
 }
