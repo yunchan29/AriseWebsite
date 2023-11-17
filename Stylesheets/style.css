@@ -48,7 +48,7 @@ html,body
     padding: 0px;
     overflow-x: hidden; 
     margin-right: 0px !important;
-    font-family: 'Alegreya', serif;
+ 
  
 }
 .header{
@@ -60,10 +60,7 @@ html,body
   position: relative;
 
 }
-h1{
-  text-align: center;
 
-}
 
 .headerBackground{
   background-image: url("/Pictures/ARISE_BG2.png");
@@ -218,7 +215,8 @@ section{
     width: 40%;
    display:grid;
    place-items: center;
-   margin:auto;
+   margin: auto;
+   box-shadow: -5px 10px 5px rgb(2, 20, 102);
    
   }
   @media(max-width: 600px){
@@ -381,5 +379,94 @@ display:flex;
 
 .cursiveFont{
   font-family: 'Caveat', cursive;
-  font-size:4vw;
+  font-size:5vw;
+}
+
+.loginPage{
+ 
+ 
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left:1px solid rgb(146, 146, 146);
+  padding:5px;
+}
+
+.loginPageWrap{
+display: flex;
+flex-direction: row;
+padding:30px;
+border-radius: 12px;
+background:rgb(24, 24, 24,.8);
+color:white;
+width:50%;
+margin: auto;
+box-shadow: -5px 10px 5px rgb(2, 20, 102);
+
+}
+
+@media(max-width:991px) {
+  .loginPageWrap{
+    display: flex;
+    flex-direction: row;
+    padding:30px;
+    border-radius: 12px;
+    background:rgb(24, 24, 24,.8);
+    color:white;
+    width:80%;
+    margin: auto;
+    box-shadow: -5px 10px 5px rgb(2, 20, 102);
+    
+    }
+}
+
+@media(max-width:500px) {
+  .loginPageWrap{
+    display: flex;
+    flex-direction: column;
+    padding:30px;
+    border-radius: 12px;
+    background:rgb(24, 24, 24,.8);
+    color:white;
+    width:80%;
+    margin: auto;
+    box-shadow: -5px 10px 5px rgb(2, 20, 102);
+    
+    }
+    .loginPage{
+ 
+ 
+      height:auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-top:1px solid rgb(146, 146, 146);
+      border-left: none;
+    }
+}
+
+.loginButton{
+  width:40%;
+}
+
+.adminLoginLogo{
+margin:auto;
+}
+
+.adminPageWrap{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: url(/Pictures/ARISE_BG2.png);
+  background-size: cover;
+  background-attachment: scroll;
+
+}
+
+.navigationBar{
+  background: rgb(34, 34, 34,.5);
 }
