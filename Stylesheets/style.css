@@ -48,6 +48,7 @@ html,body
     padding: 0px;
     overflow-x: hidden; 
     margin-right: 0px !important;
+    scroll-behavior:smooth;
  
  
 }
@@ -406,7 +407,7 @@ display:flex;
 
 
 .cursiveFont{
-  font-family: 'Caveat', cursive;
+  font-family: 'Valorant', cursive;
   font-size:5vw;
 }
 
