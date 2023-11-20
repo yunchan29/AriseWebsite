@@ -102,7 +102,7 @@ section{
   background-image:url("/Pictures/ARISE_BG.png");
   justify-content:center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
   color:white;
   background-position:center;
   background-repeat:no-repeat;
@@ -110,7 +110,7 @@ section{
   background-attachment: fixed;
   width: 100%;
   margin-bottom: -5px;
-  display: block;
+  overflow: auto;
 }
 
 .reveal{
@@ -147,16 +147,12 @@ section{
   background: rgba(220, 220, 255);
   color:black;
   text-indent:10px;
-  border-radius: 5px;
+  border-radius: 12px;
   word-break: normal;
   padding:2%;
-  width: 65%;
-  display: block;
-  margin: auto;
-  position: fixed;
-    left: 0;
-    right: 0;
+  width: 100%;
     overflow: hidden;
+    text-align: start;
 
   }
   h1{
@@ -171,7 +167,7 @@ section{
     } 
     section{
       margin-top: -1%;
-      background-image:url("/Pictures/ARISE_BG.png");
+      background:rgb(9, 0, 25);
       justify-content:center;
       align-items: center;
       height: 100vh;
@@ -182,7 +178,7 @@ section{
       background-attachment: fixed;
       width: 100%;
       margin-bottom: -5px;
-      display: block;
+      
     
    
       
@@ -255,7 +251,10 @@ section{
 
 .aboutSection{
 background-color: black;
-
+display: flex;
+flex-direction: column;
+justify-content:center;
+align-items: center;
 }
 
 .news{
@@ -580,3 +579,5 @@ color:white; }
 .adminCard:hover{
 transform: scale(1.1);
 }
+
+
