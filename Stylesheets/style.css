@@ -119,7 +119,7 @@ section{
   transform:translateY(150px);
   filter:blur(5px);
   opacity:0;
-  transition:all 2s ease;
+  transition:all 1s ease;
 }
 
 .reveal.active{
