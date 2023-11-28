@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 
 // Get a reference to the database
 const auth = getAuth(app);
-const database = getDatabase(app);
+
 
 //Auth-state listener
 
@@ -44,32 +44,15 @@ function register() {
   // Auth
   createUserWithEmailAndPassword(auth, email, password)
     .then(function (userCredential) {
+
       var user = userCredential.user;
       
-      // // Add user to the database
-      //function writeUserData(email, password) {
-        
-
-// Add data to a collection
-//db.collection("yourCollection").add({
- // email: email,
- // password:password,
-//})
-//then((docRef) => {
-  //console.log("Document written with ID: ", docRef.id);
-//})
-//.catch((error) => {
-  //console.error("Error adding document: ", error);
-//});
-  //  }
-    //writeUserData();
+  
 var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
 // Open the modal
 myModal.show();
 
-   
-  
       // Save user data to the database
     })
     .catch(function (error) {
@@ -94,3 +77,4 @@ function validate_field(field) {
   return field != null && field.length > 0;
 }
 
+$(document).off('focusin.modal');

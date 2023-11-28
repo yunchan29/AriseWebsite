@@ -10,6 +10,7 @@
   background-attachment:scroll;
   z-index: 10;
   overflow: hidden;
+  scroll-snap-align: center;
  
 }
 
@@ -73,7 +74,7 @@ html,body
   background-repeat: no-repeat;
   background-attachment:scroll;
   border-radius: 12px;
-
+  
 
 }
 .mainSectionWrap{
@@ -156,7 +157,7 @@ section{
     text-align: start;
     text-indent: 45px;
     box-shadow: -5px 10px 5px rgb(2, 20, 102);
-
+    scroll-snap-type: y mandatory;
   }
   h1{
     font-size: 3em;
@@ -592,3 +593,8 @@ color:white; }
 transform: scale(1.1);
 }
 
+
+.modal-backdrop.show {
+  opacity: var(--bs-backdrop-opacity);
+  z-index: -1;
+}
