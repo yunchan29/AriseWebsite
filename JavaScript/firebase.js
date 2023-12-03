@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,20 +19,54 @@ const app = initializeApp(firebaseConfig);
 
 // Get a reference to the database
 const auth = getAuth(app);
-
+const db = getFirestore(app);
 
 //Auth-state listener
 
-
 // Wait for the DOM to load before attaching the click event
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("btnMain").addEventListener("click", register);
+  document.getElementById("btnMain").addEventListener("click", registerMember);
 });
 
-// Set up register function
-function register() {
+// ... (your existing code)
+
+function registerMember() {
   const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const yearSection = document.getElementById('yearSection').value;
+
+  // Validate input fields
+  if (!validate_email(email) || !validate_field(firstName) || !validate_field(lastName) || !validate_field(yearSection)) {
+    alert("Invalid input. Please check your details.");
+    return;
+  }
+
+  // Save user data to Firestore
+  const userRef = collection(db, 'members');
+  const userData = {
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    yearSection: yearSection,
+    // Add more fields as needed
+  };
+
+  addDoc(userRef, userData)
+    .then(() => {
+      var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+      myModal.show();
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+      alert("Failed to save user data. Please try again.");
+    });
+}
+
+// Set up register function for admin login
+function registerAdmin() {
+  const email = document.getElementById('adminEmail').value;
+  const password = document.getElementById('adminPassword').value;
 
   // Validate input fields
   if (!validate_email(email) || !validate_password(password)) {
@@ -40,29 +74,25 @@ function register() {
     return;
   }
 
-  console.log("eyeye")
   // Auth
   createUserWithEmailAndPassword(auth, email, password)
     .then(function (userCredential) {
-
       var user = userCredential.user;
-      
-  
-var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
-// Open the modal
-myModal.show();
+      // Perform any additional admin-related tasks if needed
 
-      // Save user data to the database
+      // Example: Redirect to admin dashboard
+      window.location.href = "/admin-dashboard";
     })
     .catch(function (error) {
-      var error_code = error.code;
       var error_message = error.message;
-
       console.log(error_message);
       alert(error_message);
     });
 }
+
+// ... (your existing functions)
+
 
 function validate_email(email) {
   var expression = /^[^@]+@\w+(\.\w+)+\w$/;
@@ -76,5 +106,3 @@ function validate_password(password) {
 function validate_field(field) {
   return field != null && field.length > 0;
 }
-
-$(document).off('focusin.modal');
