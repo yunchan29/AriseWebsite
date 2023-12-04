@@ -19,24 +19,38 @@
             <div class="loginPage container">
                 <h2 class="cursiveFont">Admin</h2>
                 <div class="mb-3 col-md-8">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <label for="adminEmail" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="adminEmail" placeholder="Enter your email here">
                   </div>
                   <div class="col-md-8">
-                  <label for="inputPassword5" class="form-label">Password</label>
+                  <label for="adminPassword" class="form-label">Password</label>
                   
                   
-                  <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your password here">
+                  <input type="password" id="adminPassword" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your password here">
                 </div>
                   <br>
                  
-                  <a href="adminPage.html" class="loginButton btn btn-primary">Log in</a>
+                  <a class="loginButton btn btn-primary" id="btnAdminLogin">Log in</a><br>
+                  
                 
                 </div>
                 
             </div>
        
             </div>
-    
+    <!--Scripts-->
+<script type="module" defer src="JavaScript/firebase.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         </body>
 </html>

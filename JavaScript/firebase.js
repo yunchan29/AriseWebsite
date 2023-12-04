@@ -1,6 +1,6 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 // Firebase configuration
@@ -21,15 +21,31 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-//Auth-state listener
-
 // Wait for the DOM to load before attaching the click event
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("btnMain").addEventListener("click", registerMember);
+  const btnMain = document.getElementById("btnMain");
+  const btnAdminLogin = document.getElementById("btnAdminLogin");
+  const btnAdmin = document.getElementById("btnAdmin");
+  const btnAdminLogout = document.getElementById("btnAdminLogout");
+
+  if (btnMain) {
+    btnMain.addEventListener("click", registerMember);
+  }
+
+  if (btnAdminLogin) {
+    btnAdminLogin.addEventListener("click", logInAdmin);
+  }
+
+  if (btnAdmin) {
+    btnAdmin.addEventListener("click", registerAdmin);
+  }
+
+  if (btnAdminLogout) {
+    btnAdminLogout.addEventListener("click", logOutAdmin);
+  }
 });
 
-// ... (your existing code)
-
+// Register member function
 function registerMember() {
   const email = document.getElementById('email').value;
   const firstName = document.getElementById('firstName').value;
@@ -63,7 +79,7 @@ function registerMember() {
     });
 }
 
-// Set up register function for admin login
+// Register admin function
 function registerAdmin() {
   const email = document.getElementById('adminEmail').value;
   const password = document.getElementById('adminPassword').value;
@@ -79,10 +95,25 @@ function registerAdmin() {
     .then(function (userCredential) {
       var user = userCredential.user;
 
-      // Perform any additional admin-related tasks if needed
+      // Save admin data to Firestore
+      const adminRef = collection(db, 'admins');
+      const adminData = {
+        email: email,
+        // Add more admin fields as needed
+      };
 
-      // Example: Redirect to admin dashboard
-      window.location.href = "/admin-dashboard";
+      addDoc(adminRef, adminData)
+        .then(() => {
+          // Perform any additional admin-related tasks if needed
+
+          // Example: Redirect to admin dashboard
+          window.location.href = "/admin-dashboard";
+        })
+        .catch((error) => {
+          console.error("Error adding admin document: ", error);
+          alert("Failed to save admin data. Please try again.");
+        });
+
     })
     .catch(function (error) {
       var error_message = error.message;
@@ -91,9 +122,51 @@ function registerAdmin() {
     });
 }
 
-// ... (your existing functions)
+// Log in admin function
+function logInAdmin() {
+  const email = document.getElementById('adminEmail').value;
+  const password = document.getElementById('adminPassword').value;
 
+  // Validate input fields
+  if (!validate_email(email) || !validate_password(password)) {
+    alert("Invalid Email or Password");
+    return;
+  }
 
+  // Auth
+  signInWithEmailAndPassword(auth, email, password)
+    .then(function (userCredential) {
+      var user = userCredential.user;
+
+      // Perform any additional admin-related tasks if needed
+
+      // Example: Redirect to admin dashboard
+      window.location.href = "adminPage.html";
+    })
+    .catch(function (error) {
+      var error_message = error.message;
+      console.log(error_message);
+      alert(error_message);
+    });
+}
+
+// Log out admin function
+function logOutAdmin() {
+  // Auth
+  signOut(auth)
+    .then(function () {
+      // Sign-out successful.
+      alert("Logged out successfully!");
+      window.location.href = "index.html"; // Redirect to the home page or any other desired page after logout
+    })
+    .catch(function (error) {
+      // An error happened.
+      console.error("Error during logout: ", error);
+      alert("Failed to log out. Please try again.");
+    });
+}
+
+// Validation functions
 function validate_email(email) {
   var expression = /^[^@]+@\w+(\.\w+)+\w$/;
   return expression.test(email);
