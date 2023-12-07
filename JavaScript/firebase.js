@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -44,9 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
     btnAdminLogout.addEventListener("click", logOutAdmin);
   }
 });
+fetchAndDisplayMembers();
 
 // Register member function
-function registerMember() {
+async function registerMember() {
+  console.log("Registering member...");
+
   const email = document.getElementById('email').value;
   const firstName = document.getElementById('firstName').value;
   const lastName = document.getElementById('lastName').value;
@@ -68,15 +71,20 @@ function registerMember() {
     // Add more fields as needed
   };
 
-  addDoc(userRef, userData)
-    .then(() => {
-      var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-      myModal.show();
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-      alert("Failed to save user data. Please try again.");
-    });
+  try {
+    console.log("Adding document to Firestore:", userData);
+    await addDoc(userRef, userData);
+
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+
+    // Fetch and display members after registration
+    const members = await fetchMembers();
+    displayMembers(members);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    alert("Failed to save user data. Please try again.");
+  }
 }
 
 // Register admin function
@@ -178,4 +186,65 @@ function validate_password(password) {
 
 function validate_field(field) {
   return field != null && field.length > 0;
+}
+
+// Fetch and display members function
+async function fetchAndDisplayMembers() {
+  try {
+      const members = await fetchMembers();
+      displayMembers(members);
+  } catch (error) {
+      console.error("Error fetching and displaying members: ", error);
+  }
+}
+
+// Fetch members function
+async function fetchMembers() {
+  try {
+      const membersCollection = collection(db, 'members');
+      const membersSnapshot = await getDocs(membersCollection);
+      const membersList = [];
+
+      membersSnapshot.forEach((doc) => {
+          const memberData = doc.data();
+          membersList.push(memberData);
+      });
+
+      return membersList;
+  } catch (error) {
+      console.error("Error fetching members: ", error);
+      throw error; // Re-throw the error to be caught by the calling function
+  }
+}
+
+// Display members function
+function displayMembers(members) {
+  const membersContainer = document.getElementById('membersContainer');
+
+  // Check if membersContainer is null or undefined
+  if (!membersContainer) {
+      console.error('Members container not found.');
+      return;
+  }
+
+  // Clear existing content
+  membersContainer.innerHTML = '';
+
+  // Check if members exist
+  if (members.length === 0) {
+      console.log('No members to display.');
+      return;
+  }
+
+  // Display each member
+  members.forEach((member) => {
+      const memberDiv = document.createElement('div');
+      memberDiv.innerHTML = `
+          <p>Email: ${member.email}</p>
+          <p>Name: ${member.firstName} ${member.lastName}</p>
+          <p>Year/Section: ${member.yearSection}</p>
+          <hr>
+      `;
+      membersContainer.appendChild(memberDiv);
+  });
 }
