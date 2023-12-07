@@ -283,7 +283,7 @@ align-items: center;
 }
 
 .newsSection{
-  background:rgba(33, 1, 77);
+  background:#090a2e;
   color:white;
   text-align: center;
 }
@@ -396,16 +396,16 @@ display:flex;
 }
 
 .custom-shape-divider-bottom-1700048645 .shape-fill {
-  fill: rgba(33, 1, 77);
+  fill: #090a2e;
 }
 
 /* CSS */
 .button-34 {
-  background: #5E5DF0;
+  background: #3a02dd;
   border-radius: 999px;
-  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-shadow: #3a02dd 0 10px 20px -10px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #070707;
   cursor: pointer;
   font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
   font-size: 16px;
@@ -543,11 +543,11 @@ color:white; }
 .column {
   flex: 25%;
   max-width: 25%;
-  padding: 0 4px;
+  padding: 0 5px;
 }
 
 .column img {
-  margin-top: 8px;
+  margin-top: 15px;
   vertical-align: middle;
   width: 100%;
 }
@@ -597,4 +597,16 @@ transform: scale(1.1);
 .modal-backdrop.show {
   opacity: var(--bs-backdrop-opacity);
   z-index: -1;
+}
+
+.newsImg{
+  border-radius: 12px;
+  opacity: 70%;
+
+}
+
+.newsImg:hover{
+transform: scale(1.1);
+opacity: 100%;
+cursor:pointer;
 }
