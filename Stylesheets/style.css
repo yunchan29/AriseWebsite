@@ -583,6 +583,12 @@ color:white; }
   box-shadow: -5px 10px 5px rgb(2, 20, 102);
 }
 
+@media(max-width:991px){
+.newsPanelContainer{
+  width:100%;
+}
+}
+
 .adminDashboard{
   background-image: url("/Pictures/ARISE_BG.png");
   height:100vh;
@@ -623,4 +629,11 @@ cursor:pointer;
   width: 50%;
   
   margin:5px;
+}
+
+@media(max-width:600px){
+  .adminbtn{
+    width: 100%;
+    overflow: auto;
+  }
 }
