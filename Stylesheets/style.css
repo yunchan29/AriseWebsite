@@ -579,6 +579,8 @@ color:white; }
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
+  box-shadow: -5px 10px 5px rgb(2, 20, 102);
 }
 
 .adminDashboard{
@@ -591,6 +593,8 @@ color:white; }
   overflow: auto;
   color:white;
   text-align: center;
+  
+  
 }
 
 .adminCard:hover{

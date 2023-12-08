@@ -8,18 +8,20 @@
     <link rel="stylesheet" href="/Stylesheets/style.css">
 </head>
 <body>
+   
     <div class="adminDashboard">
-        <h1 class="cursiveFont">Admin Page</h1>
+        <h1 class="cursiveFont">Admin Panel</h1>
         <h3>Dashboard</h3>
         <div class="divider">
             <div class="newsPanelContainer">
-                <h4>What do you want to do?</h4>
+                <h5>What do you want to do?</h5>
                <a class="adminbtn btn btn-primary" href="adminMemberConf.html">Member Management</a>
                <a class="adminbtn btn btn-primary" href="adminConfig.html">Website Configuration</a>
                 <a id="btnAdminLogout" class="adminbtn btn btn-primary">Log out</a>
             </div>    
         </div>
     </div>  
+    
     <script type="module" defer src="JavaScript/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
@@ -28,5 +30,20 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Firebase configuration and initialization
+
+        // Check if the user is authenticated
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in, allow access to the admin page
+                console.log("User is authenticated");
+            } else {
+                // User is not signed in, redirect to the home page or login page
+                console.log("User is not authenticated. Redirecting...");
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 </body>
 </html>
