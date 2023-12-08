@@ -570,11 +570,15 @@ color:white; }
 
 
 .newsPanelContainer{
-  width:80%;
+  width:50%;
   margin: auto;
   background:rgb(21, 21, 21,0.5);
   padding:30px;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .adminDashboard{
@@ -590,7 +594,7 @@ color:white; }
 }
 
 .adminCard:hover{
-transform: scale(1.1);
+transform: scale(1.02);
 }
 
 
@@ -609,4 +613,10 @@ transform: scale(1.1);
 transform: scale(1.1);
 opacity: 100%;
 cursor:pointer;
+}
+
+.adminbtn{
+  width: 50%;
+  
+  margin:5px;
 }
