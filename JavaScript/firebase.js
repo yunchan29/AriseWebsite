@@ -249,13 +249,16 @@ function displayMembers(members) {
     const memberDiv = document.createElement('div');
     const memberId = member.id;
     memberDiv.innerHTML = `
+    <div class="memberConfig">
+        <img style="border-radius:20px; margin:10px;" src="${member.photo}" alt="Member Photo"><br>
         <p>Email: ${member.email}</p>
         <p>Name: ${member.firstName} ${member.lastName}</p>
         <p>Year/Section: ${member.yearSection}</p>
-        <img style="max-width:150px; border-radius:12px; margin:10px;" src="${member.photo}" alt="Member Photo"><br>
+        
         <button class="btn btn-primary">Edit</button>
         <button class="btn btn-primary delete-btn" data-member-id="${memberId}">Delete</button>
         <hr>
+        </div>
     `;
     membersContainer.appendChild(memberDiv);
 

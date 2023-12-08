@@ -629,11 +629,66 @@ cursor:pointer;
   width: 50%;
   
   margin:5px;
+
 }
 
 @media(max-width:600px){
   .adminbtn{
     width: 100%;
     overflow: auto;
+    
   }
 }
+
+.memberConfig {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.memberConfig:hover{
+  transform: scale(1.02);
+  box-shadow: -5px 5px 5px rgb(2, 20, 102);
+  border-radius: 12px;
+  border:.2px solid rgba(0, 0, 0, 0.253);
+}
+
+.memberConfig img {
+  width: 80px; /* Set a fixed width for the image container */
+  height: 80px; /* Set a fixed height for the image container */
+  object-fit: cover; /* Crop the image to cover the entire container */
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.memberConfig p {
+  flex: 1;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+}
+
+.memberConfig button {
+  height: 30px; /* Set the desired height for the buttons */
+  padding: 8px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.memberConfig .btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.memberConfig .delete-btn {
+  background-color: #dc3545;
+}
+
+
