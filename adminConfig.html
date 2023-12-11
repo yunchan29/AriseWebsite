@@ -19,7 +19,7 @@
           <a class="adminbtn btn btn-primary">Update news section</a>
           <a class="adminbtn btn btn-primary">Configure about section</a>
           <h4>Media Section</h4>
-           <a class="adminbtn btn btn-primary"  id="openModalBtn">Create a post</a>
+           <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create a post</a>
            <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
            <h4>Navigation</h4>
            <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
@@ -69,7 +69,7 @@
       
        
     </div>  
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" defer></script>
+    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script type="module" defer src="JavaScript/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
@@ -81,56 +81,37 @@
     <script>
       // Function to handle image preview
       function previewImage(input) {
-          var preview = document.getElementById('image-preview');
-          var file = input.files[0];
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-              preview.src = e.target.result;
-              // Set alt attribute only if a file is selected
-              preview.alt = file ? 'Preview' : '';
-          };
-
-          if (file) {
-              reader.readAsDataURL(file);
-          } else {
-              // If no file is selected, clear the preview and alt attribute
-              preview.src = '';
-              preview.alt = '';
-          }
+        var preview = document.getElementById('image-preview');
+        var file = input.files[0];
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          // Set alt attribute only if a file is selected
+          preview.alt = file ? 'Preview' : '';
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          // If no file is selected, clear the preview and alt attribute
+          preview.src = '';
+          preview.alt = '';
+        }
       }
-
+    
       // Attach the previewImage function to the change event of the file input
-      document.getElementById('image-input').addEventListener('change', function () {
-          previewImage(this);
+      document.getElementById('image-input').addEventListener('change', function() {
+        previewImage(this);
       });
-
+    
       // Clear preview and alt attribute when the modal is shown
       $('#exampleModal').on('show.bs.modal', function () {
-          document.getElementById('image-input').value = ''; // Clear the file input
-          document.getElementById('image-preview').src = ''; // Clear the preview
-          document.getElementById('image-preview').alt = ''; // Clear the alt attribute
+        document.getElementById('image-input').value = ''; // Clear the file input
+        document.getElementById('image-preview').src = ''; // Clear the preview
+        document.getElementById('image-preview').alt = ''; // Clear the alt attribute
       });
-
-      // Open modal event listener
-      document.getElementById('openModalBtn').addEventListener('click', function () {
-          $('#exampleModal').modal('show');
-      });
-
-      // Cancel button event listener
-      document.getElementById('cancelBtn').addEventListener('click', function () {
-          $('#exampleModal').modal('hide');
-      });
-
-      // Create post button event listener
-      document.getElementById('createPostBtn').addEventListener('click', function () {
-          // Add your logic for creating a post here
-          // ...
-
-          // Close the modal
-          $('#exampleModal').modal('hide');
-      });
-  </script>
+    </script>
     
     
 </body>
