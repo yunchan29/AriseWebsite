@@ -10,54 +10,66 @@
 <body>
     <div class="adminDashboard">
         <h1 class="cursiveFont">Admin Panel</h1>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-          <div class="col">
-            <div class="adminCard card text-bg-dark">
-              <img src="/Pictures/website_snapshots/newsSection.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">News Panel</h5>
-                <p class="card-text"></p>
-                <a class="btn btn-primary">Configure</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="adminCard card text-bg-dark">
-              <img src="/Pictures/website_snapshots/aboutSection.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">About Section</h5>
-                <p class="card-text"></p>
-                <a class="btn btn-primary">Configure</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="adminCard card text-bg-dark">
-              <img src="/Pictures/website_snapshots/mediaSection.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Media</h5>
-                <p class="card-text">Upload and post downloadable content here</p>
-                <a class="btn btn-primary">Configure</a>
-              </div>
-      
-            </div>
-          </div>
-          <div class="col">
-            <div class="adminCard card text-bg-dark">
-              <img src="/Pictures/website_snapshots/memberRegSection.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Member Registration</h5>
-                <p class="card-text">Customize the fields of member registration form</p>
-                <a class="btn btn-primary">Configure</a>
-              </div>
-            </div>
-          </div>
+        <h5>What do you want to do?</h5>
+        <div class="newsPanelContainer">
+          <h4>Home page</h4>
+          
+          <a class="adminbtn btn btn-primary">Change background video</a>
+          <a class="adminbtn btn btn-primary">Update header title/header text</a>
+          <a class="adminbtn btn btn-primary">Update news section</a>
+          <a class="adminbtn btn btn-primary">Configure about section</a>
+          <h4>Media Section</h4>
+           <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create a post</a>
+           <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
+           <h4>Navigation</h4>
+           <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
+           <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
+           
         </div>
       </div>
+      <!--Modals-->
+      <!--Create a post-->
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="mb-3">
+             <!-- Image preview container -->
+      <div class="text-center mb-3">
+        <img id="image-preview" class="img-fluid rounded" alt="Preview">
+      </div>
       
+      <!-- File input and upload button -->
+      <div class="custom-file">
+        <input class="form-control" type="file" class="custom-file-input" id="image-input" accept="image/*">
+      <br>
+      </div>
+          <label for="exampleFormControlTextarea1" class="form-label">Caption:</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Create post</button>
+      </div>
+    </div>
+  </div>
+</div>
       
        
     </div>  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script type="module" defer src="JavaScript/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
@@ -66,5 +78,41 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+      // Function to handle image preview
+      function previewImage(input) {
+        var preview = document.getElementById('image-preview');
+        var file = input.files[0];
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          // Set alt attribute only if a file is selected
+          preview.alt = file ? 'Preview' : '';
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          // If no file is selected, clear the preview and alt attribute
+          preview.src = '';
+          preview.alt = '';
+        }
+      }
+    
+      // Attach the previewImage function to the change event of the file input
+      document.getElementById('image-input').addEventListener('change', function() {
+        previewImage(this);
+      });
+    
+      // Clear preview and alt attribute when the modal is shown
+      $('#exampleModal').on('show.bs.modal', function () {
+        document.getElementById('image-input').value = ''; // Clear the file input
+        document.getElementById('image-preview').src = ''; // Clear the preview
+        document.getElementById('image-preview').alt = ''; // Clear the alt attribute
+      });
+    </script>
+    
+    
 </body>
 </html>
