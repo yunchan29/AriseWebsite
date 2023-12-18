@@ -705,7 +705,7 @@ cursor:pointer;
   overflow: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-
+  width: 70%;
   border-radius: 12px;
 }
 .postConfig{
@@ -728,21 +728,22 @@ cursor:pointer;
 }
 
 #postsContainer img {
-  width: auto;/* Set a fixed width for the image container */
-  max-height: 400px; /* Set a fixed height for the image container */
+  width:100%;/* Set a fixed width for the image container */
+   /* Set a fixed height for the image container */
   object-fit: cover; /* Crop the image to cover the entire container */
   border-radius: 20px;
   margin-right: 10px;
   max-width: 100%;
+  overflow: hidden;
 }
 @media(max-width:780px){
   #postsContainer img {
-    max-width: 100%;
-    max-height:200px;
+    width: 100%;
+    
     object-fit: cover; /* Crop the image to cover the entire container */
     border-radius: 20px;
     margin-right: 10px;
-    width: auto;
+
   }
   .mediaContainer {
     color: white;
@@ -750,6 +751,15 @@ cursor:pointer;
     overflow: auto;
   
   
+  }
+  #postsContainer{
+    overflow:auto;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    
+    width: 100%;
+    border-radius: 12px;
   }
   
 }
