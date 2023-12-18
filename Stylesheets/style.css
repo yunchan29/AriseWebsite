@@ -3,12 +3,12 @@
 .background{
   background: url("/Pictures/ARISE_COVER.png");
   width:100%;
-  height:120vh;
+  height:100vh;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment:scroll;
-  z-index: 10;
+  background-attachment:fixed;
+  z-index: 1;
   overflow: hidden;
   scroll-snap-align: center;
  
@@ -28,6 +28,11 @@
   overflow: auto;
 }
 
+.aboutSectionWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 
 @media(max-width: 991px){
@@ -153,7 +158,7 @@ section{
 
   background: rgba(43, 43, 43, 0.5);
   color:rgb(236, 236, 236);
-
+  z-index: 1;
   border-radius: 12px;
   word-break: normal;
   padding:2%;
