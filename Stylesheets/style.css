@@ -717,12 +717,13 @@ cursor:pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   border-radius: 12px;
   box-shadow: -5px 10px 5px rgb(2, 20, 102);
   scrollbar-width: none;  /* Firefox */
  -ms-overflow-style: none;  /* IE and Edge */
  margin-bottom: 10%;
+ text-align: left;
  
 }
 
@@ -768,3 +769,7 @@ cursor:pointer;
 }
 
 
+.adminProfile{
+  display: flex;
+  flex-direction: row;
+}

@@ -450,8 +450,12 @@ function displayPosts(posts) {
     const postId = post.id;
     postDiv.innerHTML = `
       <div class="postConfig">
-          <h5>Admin</h5>
-          <p>${post.caption}</p>
+         <div class="adminProfile">
+         <img src="https://cdn1.vectorstock.com/i/1000x1000/36/15/businessman-character-avatar-isolated-vector-12613615.jpg" style="width:40px; border-radius:120%;">
+         <h5>Admin</h5>
+         </div>
+         
+          <p style="margin-left:20%;">${post.caption}</p>
           <img style="border-radius:20px; margin:10px;" src="${post.imageUrl}" alt="Post Image"><br>
           <div class="postBtn">
           <a class="btn btn-primary">Like 👍</a>
