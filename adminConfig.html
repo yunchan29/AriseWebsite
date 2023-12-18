@@ -20,12 +20,12 @@
           <h4>About Section</h4>
           <a class="adminbtn btn btn-primary">Configure about section</a>
           <h4>Media Section</h4>
-           <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create a post</a>
+           <a class="adminbtn btn btn-primary" id="create-post-button">Create a post</a>
            <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
            <h4>Navigation</h4>
            <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
            <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
-           
+           <div id="postsContainer"></div>
         </div>
       </div>
       <!--Modals-->
@@ -59,7 +59,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success">Create post</button>
+        <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button>
       </div>
     </div>
   </div>
@@ -68,11 +68,10 @@
        
     </div>  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js"></script>    
     <script type="module" defer src="JavaScript/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
-
-
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

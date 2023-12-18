@@ -21,7 +21,11 @@
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed;}
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 
 
@@ -692,3 +696,14 @@ cursor:pointer;
 }
 
 
+#postsContainer img {
+  max-width: 400px; /* Set a fixed width for the image container */
+  max-height: 400px; /* Set a fixed height for the image container */
+  object-fit: cover; /* Crop the image to cover the entire container */
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.mediaContainer{
+  color:white;
+}
