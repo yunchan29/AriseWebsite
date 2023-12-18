@@ -78,24 +78,22 @@ async function registerMember() {
   const reader = new FileReader();
 
   reader.onloadend = async function () {
-    // Save user data to Firestore
-    const userRef = collection(db, 'members');
-    const userData = {
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      yearSection: yearSection,
-      photo: reader.result, // Save the photo as a data URL
-    };
-
     try {
+      const userRef = collection(db, 'members');
+      const userData = {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        yearSection: yearSection,
+        photo: reader.result,
+      };
+
       console.log("Adding document to Firestore:", userData);
       const docRef = await addDoc(userRef, userData);
 
       var myModal = new bootstrap.Modal(document.getElementById('myModal'));
       myModal.show();
 
-      // Fetch and display members after registration
       const members = await fetchMembers();
       displayMembers(members);
     } catch (error) {
@@ -327,39 +325,33 @@ function openCreatePostModal() {
     var file = fileInput.files[0];
   
     if (file && caption) {
-      // Log information to the console for debugging
       console.log('Caption:', caption);
       console.log('File:', file);
   
-      // Upload the image to Firebase Storage (replace 'images' with your storage path)
-      var storage = getStorage(app); // Make sure to pass the app instance to getStorage()
+      var storage = getStorage(app);
       var storageRef = ref(storage, 'images/' + file.name);
-  
-      // Use uploadBytes to upload the file
       var task = uploadBytes(storageRef, file);
   
-      // Use task.then to wait for the upload to complete
+      // Use task.catch to catch any errors during the upload
+      task.catch(error => {
+        console.error('Error during upload: ', error);
+      });
+  
       task.then(snapshot => {
-        // Image uploaded successfully, now get the download URL
         return getDownloadURL(snapshot.ref);
       })
       .then(downloadURL => {
-        // Log the download URL to the console
         console.log('Download URL:', downloadURL);
   
-        // Store the post data in Firestore
         return addDoc(collection(db, 'posts'), {
           caption: caption,
           imageUrl: downloadURL,
-          timestamp: new Date() // Use the current date instead of serverTimestamp
+          timestamp: new Date(),
         });
       })
       .then(docRef => {
         console.log('Post added with ID: ', docRef.id);
-        // Close the modal after successful post creation
         $('#exampleModal').modal('hide');
-        
-        // Fetch and display posts after successful post creation
         fetchAndDisplayPosts();
       })
       .catch(error => {
@@ -369,7 +361,6 @@ function openCreatePostModal() {
       console.log('File or caption is missing.');
     }
   }
-  
   
 
 
@@ -382,17 +373,18 @@ function openCreatePostModal() {
 
   });
 
-  // Clear preview and alt attribute when the modal is shown
-  $('#exampleModal').on('show.bs.modal', function () {
-    document.getElementById('image-input').value = ''; // Clear the file input
-    document.getElementById('image-preview').src = ''; // Clear the preview
-    document.getElementById('image-preview').alt = ''; // Clear the alt attribute
-    document.getElementById('exampleFormControlTextarea1').value = ''; // Clear the caption input
-  });
+// Clear preview and alt attribute when the modal is shown
+$('#exampleModal').on('shown.bs.modal', function () {
+  document.getElementById('image-input').value = ''; // Clear the file input
+  document.getElementById('image-preview').src = ''; // Clear the preview
+  document.getElementById('image-preview').alt = ''; // Clear the alt attribute
+  document.getElementById('exampleFormControlTextarea1').value = ''; // Clear the caption input
+});
 
-  document.getElementById('upload-post-button').addEventListener('click', function() {
-    createPost(); // Call the createPost function when the button is clicked
-  });
+document.getElementById('upload-post-button').addEventListener('click', function() {
+  createPost(); // Call the createPost function when the button is clicked
+});
+
   
 // Fetch and display posts function
 async function fetchAndDisplayPosts() {
@@ -458,10 +450,13 @@ function displayPosts(posts) {
     const postId = post.id;
     postDiv.innerHTML = `
       <div class="postConfig">
+          <h5>Admin</h5>
+          <p>${post.caption}</p>
           <img style="border-radius:20px; margin:10px;" src="${post.imageUrl}" alt="Post Image"><br>
-          <p>Caption: ${post.caption}</p>
-         
-          <hr>
+          <div class="postBtn">
+          <a class="btn btn-primary">Like 👍</a>
+          <a class="btn btn-success">Comment 💭</a>
+          </div>
       </div>
     `;
     postsContainer.appendChild(postDiv);

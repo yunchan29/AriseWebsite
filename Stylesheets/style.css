@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: auto;
 }
 
 
@@ -585,6 +586,8 @@ color:white; }
   align-items: center;
   border-radius: 12px;
   box-shadow: -5px 10px 5px rgb(2, 20, 102);
+  scrollbar-width: none;  /* Firefox */
+ -ms-overflow-style: none;  /* IE and Edge */
 }
 
 @media(max-width:991px){
@@ -695,15 +698,73 @@ cursor:pointer;
   background-color: #dc3545;
 }
 
+#postsContainer{
+  overflow:auto;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  border-radius: 12px;
+}
+.postConfig{
+  width:100%;
+  margin: auto;
+  background:rgb(21, 21, 21,0.5);
+  padding:30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: -5px 10px 5px rgb(2, 20, 102);
+  scrollbar-width: none;  /* Firefox */
+ -ms-overflow-style: none;  /* IE and Edge */
+ margin-bottom: 10%;
+ 
+}
 
 #postsContainer img {
   max-width: 400px; /* Set a fixed width for the image container */
-  max-height: 400px; /* Set a fixed height for the image container */
+  max-height: 300px; /* Set a fixed height for the image container */
   object-fit: cover; /* Crop the image to cover the entire container */
   border-radius: 20px;
   margin-right: 10px;
 }
-
-.mediaContainer{
-  color:white;
+@media(max-width:780px){
+  #postsContainer img {
+    max-width: 120px; /* Set a fixed width for the image container */
+    max-height: 120px; /* Set a fixed height for the image container */
+    object-fit: cover; /* Crop the image to cover the entire container */
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  .mediaContainer {
+    color: white;
+ 
+    overflow: auto;
+  
+  
+  }
+  
 }
+
+.mediaContainer {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+ overflow: auto;
+ margin-top: 120px;
+
+}
+
+
+#postsContainer::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers (Chrome, Safari, etc.) */
+}
+
+
