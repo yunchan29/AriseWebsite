@@ -236,6 +236,42 @@ async function fetchMembers() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const membersContainer = document.getElementById('membersContainer');
+
+  if (membersContainer) {
+      membersContainer.addEventListener('click', function (event) {
+          if (event.target.tagName === 'IMG') {
+              const imageSrc = event.target.src;
+              showLargerImage(imageSrc);
+          }
+      });
+  }
+
+  const closeModalButton = document.getElementById('closeModalButton');
+
+  if (closeModalButton) {
+      closeModalButton.addEventListener('click', closeModal);
+  }
+});
+
+function showLargerImage(imageSrc) {
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+
+  modalImage.src = imageSrc;
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  const modal = document.getElementById('imageModal');
+  modal.style.display = 'none';
+}
+
+
+
+
+
   // Display members function
   function displayMembers(members) {
     const membersContainer = document.getElementById('membersContainer');
@@ -261,7 +297,7 @@ async function fetchMembers() {
       const memberId = member.id;
       memberDiv.innerHTML = `
         <div class="memberConfig">
-            <img style="border-radius:20px; margin:10px;" src="${member.photo}" alt="Member Photo"><br>
+        <img style="border-radius:20px; margin:10px; cursor: pointer;" src="${member.photo}" alt="Member Photo" onclick="showLargerImage('${member.photo}')"><br>
             <p>Email: ${member.email}</p>
             <p>Name: ${member.firstName} ${member.lastName}</p>
             <p>Year/Section: ${member.yearSection}</p>
@@ -282,6 +318,8 @@ async function fetchMembers() {
       deleteButton.addEventListener('click', () => deleteMember(memberId));
     });
   }
+
+
 
   async function editMember(memberId) {
     try {

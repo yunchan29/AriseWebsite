@@ -11,19 +11,31 @@
 
 <body>
     <div class="adminDashboard">
+       
         <h1 class="cursiveFont">Admin Panel</h1>
         <h3>Member Management</h3>
         <div class="divider">
+            <div class="memberManagement">
             <div class="newsPanelContainer">
                 <div id="membersContainer"></div>
+                <div id="imageModal" class="modal">
+                    <div class="modal-content">
+                        <span id="closeModalButton" class="close" onclick="closeModal()">&times;</span>
+                        <img id="modalImage" src="" alt="Modal Image">
+                    </div>
+                </div>
                 
             </div><br><br>
-            <div class="newsPanelContainer">
+            <div class="newsPanelContainer2">
                 <h4>Edit Member Info</h4>
                 <div id="editMemberContainer"></div>
             </div>
         </div>
     </div>
+    </div>
+    
+
+  
 
     
 
