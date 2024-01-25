@@ -93,6 +93,13 @@ async function registerMember() {
       console.log("Adding document to Firestore:", userData);
       const docRef = await addDoc(userRef, userData);
 
+       // Clear input fields after successful registration
+       document.getElementById('email').value = '';
+       document.getElementById('firstName').value = '';
+       document.getElementById('lastName').value = '';
+       document.getElementById('yearSection').value = '';
+       document.getElementById('photo').value = '';
+
       var myModal = new bootstrap.Modal(document.getElementById('myModal'));
       myModal.show();
 
