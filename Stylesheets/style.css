@@ -614,6 +614,22 @@ color:white; }
 .newsPanelContainer{
   width:100%;
 }
+.newsPanelContainer2{
+  width:100%;
+  margin: auto;
+  background:rgb(21, 21, 21,0.5);
+  padding:30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: -5px 10px 5px rgb(2, 20, 102);
+  scrollbar-width: none;  /* Firefox */
+ -ms-overflow-style: none;  /* IE and Edge */
+ background-attachment: fixed;
+}
 }
 
 .adminDashboard{
@@ -892,22 +908,23 @@ align-items: center;
   .memberManagement{
     display: flex;
     flex-direction: column;
-    .modal {
-      display: none;
-      position:absolute;
-      z-index: 1;
-      left: 50%;
-      top: 50%;
-      width: 80%;
-      height: auto;
-      max-width: 500px;
-      max-height: 500px;
-      overflow: auto;
-      transform: translate(-50%,-50%);
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 60px;
-      overflow: auto;
-    }
+    
+  }
+  .modal {
+    display: none;
+    position:absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    width: 40%;
+    height: auto;
+    max-width: 500px;
+    max-height: 500px;
+    overflow: auto;
+    transform: translate(-50%,-50%);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+    overflow: auto;
   }
 }
