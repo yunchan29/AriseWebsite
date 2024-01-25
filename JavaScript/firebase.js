@@ -2,7 +2,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, updateDoc,addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
 
 
@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-fetchAndDisplayMembers();
+
+
+
 
 // Register member function
 async function registerMember() {
@@ -227,47 +229,143 @@ async function fetchMembers() {
   }
 }
 
-// Display members function
-function displayMembers(members) {
-  const membersContainer = document.getElementById('membersContainer');
+  // Display members function
+  function displayMembers(members) {
+    const membersContainer = document.getElementById('membersContainer');
 
-  // Check if membersContainer is null or undefined
-  if (!membersContainer) {
-    console.error('Members container not found.');
-    return;
-  }
+    // Check if membersContainer is null or undefined
+    if (!membersContainer) {
+      console.error('Members container not found.');
+      return;
+    }
 
-  // Clear existing content
-  membersContainer.innerHTML = '';
+    // Clear existing content
+    membersContainer.innerHTML = '';
 
-  // Check if members exist
-  if (members.length === 0) {
-    console.log('No members to display.');
-    return;
-  }
+    // Check if members exist
+    if (members.length === 0) {
+      console.log('No members to display.');
+      return;
+    }
 
-  // Display each member
-  members.forEach((member) => {
-    const memberDiv = document.createElement('div');
-    const memberId = member.id;
-    memberDiv.innerHTML = `
-    <div class="memberConfig">
-        <img style="border-radius:20px; margin:10px;" src="${member.photo}" alt="Member Photo"><br>
-        <p>Email: ${member.email}</p>
-        <p>Name: ${member.firstName} ${member.lastName}</p>
-        <p>Year/Section: ${member.yearSection}</p>
-        
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-primary delete-btn" data-member-id="${memberId}">Delete</button>
-        <hr>
+    // Display each member
+    members.forEach((member) => {
+      const memberDiv = document.createElement('div');
+      const memberId = member.id;
+      memberDiv.innerHTML = `
+        <div class="memberConfig">
+            <img style="border-radius:20px; margin:10px;" src="${member.photo}" alt="Member Photo"><br>
+            <p>Email: ${member.email}</p>
+            <p>Name: ${member.firstName} ${member.lastName}</p>
+            <p>Year/Section: ${member.yearSection}</p>
+            
+            <button class="btn btn-primary edit-btn" data-member-id="${memberId}">Edit</button>
+            <button class="btn btn-primary delete-btn" data-member-id="${memberId}">Delete</button>
+            <hr>
         </div>
-    `;
-    membersContainer.appendChild(memberDiv);
+      `;
+      membersContainer.appendChild(memberDiv);
 
-    // Add click event listener for the "Delete" button
-    const deleteButton = memberDiv.querySelector('.delete-btn');
-    deleteButton.addEventListener('click', () => deleteMember(memberId));
-  });
+      // Add click event listener for the "Edit" button
+      const editButton = memberDiv.querySelector('.edit-btn');
+      editButton.addEventListener('click', () => editMember(memberId));
+
+      // Add click event listener for the "Delete" button
+      const deleteButton = memberDiv.querySelector('.delete-btn');
+      deleteButton.addEventListener('click', () => deleteMember(memberId));
+    });
+  }
+
+  async function editMember(memberId) {
+    try {
+      // Fetch the member data based on memberId
+      const memberRef = doc(db, 'members', memberId);
+      const memberDoc = await getDoc(memberRef);
+  
+      if (memberDoc.exists()) {
+        const memberData = memberDoc.data();
+  
+        // Create the edit form div
+        const editFormContainer = createEditForm(memberData);
+        const editForm = editFormContainer.querySelector('form'); // Declare editForm here
+  
+        // Add the edit form container to the document body or any other container
+        document.getElementById('editMemberContainer').innerHTML = '';
+        document.getElementById('editMemberContainer').appendChild(editFormContainer);
+  
+        // Add submit event listener for the edit form
+        editForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+  
+          // Get updated member data from the form
+          const updatedMemberData = {
+            firstName: editForm.firstName.value,
+            lastName: editForm.lastName.value,
+            email: editForm.email.value,
+            yearSection: editForm.yearSection.value,
+            // Add other fields as needed
+          };
+  
+          // Update the member in the database
+          await updateMember(memberId, updatedMemberData);
+  
+          // Fetch and display members after editing
+          const members = await fetchMembers();
+          displayMembers(members);
+  
+          // Clear the edit form container
+          document.getElementById('editMemberContainer').innerHTML = '';
+        });
+      } else {
+        console.error("Member not found for editing.");
+        alert("Member not found for editing. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error editing member: ', error);
+      alert('Failed to edit member. Please try again.');
+    }
+  }
+  
+function createEditForm(memberData) {
+  const editFormContainer = document.createElement('div');
+  editFormContainer.id = 'editFormContainer'; // Optional: Add an ID to the container for styling or other purposes
+
+  const editForm = document.createElement('form');
+  editForm.innerHTML = `
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" value="${memberData.firstName}" required><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" value="${memberData.lastName}" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="${memberData.email}" required><br>
+
+    <label for="yearSection">Year/Section:</label>
+    <input type="text" id="yearSection" name="yearSection" value="${memberData.yearSection}" required><br>
+
+    <!-- Add other fields as needed -->
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  `;
+
+  // Append the form to the container
+  editFormContainer.appendChild(editForm);
+
+  return editFormContainer;
+}
+
+// Function to update a member
+async function updateMember(memberId, updatedMemberData) {
+  const memberRef = doc(db, 'members', memberId);
+
+  try {
+    await updateDoc(memberRef, updatedMemberData);
+    console.log('Member successfully updated!');
+  } catch (error) {
+    console.error('Error updating member: ', error);
+    throw error;
+  }
 }
 
 // Function to delete a member
@@ -302,6 +400,9 @@ async function deleteMember(memberId) {
   }
 }
 
+
+// Call the fetchAndDisplayMembers function to initially load members
+fetchAndDisplayMembers();
 // Function to open the create post modal
 function openCreatePostModal() {
   // Add any additional logic you need here
