@@ -377,17 +377,17 @@ function createEditForm(memberData) {
 
   const editForm = document.createElement('form');
   editForm.innerHTML = `
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" value="${memberData.firstName}" required><br>
+    <label class="form-label" for="firstName">First Name:</label>
+    <input type="text" id="firstName" class="form-control" name="firstName" value="${memberData.firstName}" required><br>
 
     <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" value="${memberData.lastName}" required><br>
+    <input type="text" id="lastName" class="form-control" name="lastName" value="${memberData.lastName}" required><br>
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="${memberData.email}" required><br>
+    <input type="email" id="email" class="form-control" name="email" value="${memberData.email}" required><br>
 
     <label for="yearSection">Year/Section:</label>
-    <input type="text" id="yearSection" name="yearSection" value="${memberData.yearSection}" required><br>
+    <input type="text" id="yearSection" class="form-control" name="yearSection" value="${memberData.yearSection}" required><br>
 
     <!-- Add other fields as needed -->
 
