@@ -745,7 +745,7 @@ cursor:pointer;
   border-radius: 12px;
 }
 .postConfig{
-  width:100%;
+  width:50%;
   margin: auto;
   background:rgb(21, 21, 21,0.5);
   padding:30px;
@@ -755,7 +755,7 @@ cursor:pointer;
   justify-content: center;
   align-items: left;
   border-radius: 12px;
-  box-shadow: -5px 10px 5px rgb(2, 20, 102);
+  box-shadow: 2px 2px 5px rgb(2, 20, 102);
   scrollbar-width: none;  /* Firefox */
  -ms-overflow-style: none;  /* IE and Edge */
  margin-bottom: 10%;
@@ -913,9 +913,9 @@ align-items: center;
     
     z-index: 1;
   
-    height: auto;
+   height: 100vh;
   
-    overflow: auto;
+   
  
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
@@ -927,7 +927,7 @@ align-items: center;
 .modal-content{
   max-width:500px;
   max-height:500px;
-  overflow:hidden;
+  overflow:auto;
   background:rgba(0, 0, 0, 0.63);
   border:black;
   box-shadow: -5px 5px 5px rgb(2, 20, 102);
