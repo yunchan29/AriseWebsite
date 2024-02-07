@@ -358,7 +358,9 @@ align-items: center;
  
 }
 }
-
+#dynamicHeader{
+  
+}
 .headerText{
  
   width: 50%; /* Each box takes up 50% of the container width */
@@ -369,6 +371,9 @@ align-items: center;
   margin: auto;
 }
 
+.headerWrap{
+
+}
 
 
 .headerLogo{
@@ -377,6 +382,8 @@ align-items: center;
 
 .headerContainer{
 display:flex;
+
+
 }
 
 
@@ -435,7 +442,7 @@ display:flex;
 
 .cursiveFont{
   font-family: 'Valorant', sans-serif;
-  font-size:5vw;
+  font-size:4vw;
 }
 
 .loginPage{
@@ -932,4 +939,22 @@ align-items: center;
   border:black;
   box-shadow: -5px 5px 5px rgb(2, 20, 102);
   
+}
+
+#loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(41, 41, 41, 0.8);
+  z-index: 1000;
+  color: #fefefe;
+}
+
+.invisibleString{
+  opacity: 0;
 }

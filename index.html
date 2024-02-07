@@ -4,15 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Arise Esports</title>
-        <link rel="stylesheet" href="/AriseWebsite/Stylesheets/style.css">
+        <link rel="stylesheet" href="Stylesheets/style.css">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" referrerpolicy="no-referrer">
 
        
     </head>
     <body>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+       <!-- Loading Screen -->
+    <div id="loading-screen">
+      <p>Fetching data from database.........</p>
+  </div>
+
+        
         <div class="headerLogo">
           <video autoplay loop muted plays-inline class="back-video">
             <source src="/Pictures/header_video.mp4" type="video/mp4">
@@ -28,21 +32,24 @@
                 <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
             </svg>
         </div>
+        
         <!--Homepage Section-->
         <div class="container-fluid w-100 vh-100 d-flex flex-column justify-content-center align-items-left text-white fs-4">
-       <!--Header-->
-      <div class="headerContainer container-fluid">
-        <img class="img-fluid" src="/Pictures/Arise LOGO WHITE2.png" class="headerImage" style="width:35rem" alt="header_logo">
-      <div class="headerText container">
-        <div class="headerTitle">
-        <h2 class="cursiveFont">Arising Radiants</h2></div>
-        <p>
-          Registration for ARISING RADIANTS, an online Valorant Tournament is officially OPEN! Brace yourselves for intense battles, tactical plays, and the chance to claim the prize "Winner Takes All" 💰🔥</p>
-        <button class="button-34"><a href="#news">Check out now!</button></a>
-      </div>
-      </div>
-      </div>
-                
+    <!-- Header -->
+
+  
+ 
+
+  <div>
+    <div class="headerText container" id="dynamicHeader">
+      <!-- Dynamic header content will be inserted here -->
+    </div>
+  </div>
+</div>
+</div>
+
+
+
                
     
 </div>
@@ -50,6 +57,11 @@
       <!--News Section-->
     <div class="newsSection">
       <h2 id="news" class="cursiveFont reveal">News</h2>
+      <button id="btnMain" style="display: none;">Button Main</button>
+<button id="btnAdminLogin" style="display: none;">Button Admin Login</button>
+<button id="btnAdmin" style="display: none;">Button Admin</button>
+<button id="btnAdminLogout" style="display: none;">Button Admin Logout</button>
+      
         <div class="news reveal">
           <div class="row">
             <div class="column">
@@ -82,20 +94,63 @@
         
           
             </div>
-            
+            <!--Invisible Admin Panel for functions to work-->
+            <div class="invisibleString" style="display: none;">
+            <h1 class="cursiveFont">Admin Panel</h1>
+        <h5>What do you want to do?</h5>
+        <div class="newsPanelContainer">
+          <h4>Home page</h4>
+          
+          <a class="adminbtn btn btn-primary">Change background video</a>
+          <a class="adminbtn btn btn-primary" href="#adminSection">Update header title/header text</a>
+          <a class="adminbtn btn btn-primary">Update news section</a>
+          <h4>About Section</h4>
+          <a class="adminbtn btn btn-primary">Configure about section</a>
+          <h4>Media Section</h4>
+           <a class="adminbtn btn btn-primary" id="create-post-button">Create a post</a>
+           <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
+           <h4>Navigation</h4>
+           <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
+           <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
+           <h4>Media Preview</h4>
+           <div id="postsContainer"></div>
+           <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button>
+           <div id="adminSection">
+            <h3>Update Header Content</h3>
+            <form id="headerForm">
+              <label for="titleInput">Title:</label>
+              <input type="text" id="titleInput" required><br>
+          
+              <label for="descriptionInput">Description:</label>
+              <textarea id="descriptionInput" rows="4" required></textarea><br>
+          
+          
+              <button type="submit">Update Header</button>
+            </form>
+          </div>
+           <div id="membersContainer"></div>
           </div>  
+          </div>
           <footer class="bg-dark text-white text-center py-3">
             <div class="container">
               <p>&copy; Arise Esports. All rights reserved 2023.</p>
             </div>
           </footer>
 
-      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script id="replace_with_navbar" src="nav.js"></script>
-        
-      
-      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    
+         
+          <script id="replace_with_navbar" src="nav.js"></script>
       <script src="/JavaScript/index.js"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+          <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+          <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+          <script type="module" src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js"></script>    
+          <script defer type="module" src="JavaScript/firebase.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+          
+      
     </body>
 </html>

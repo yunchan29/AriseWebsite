@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/Stylesheets/style.css">
 </head>
 <body>
+  <div id="loading-screen">
+    <p>Fetching data from database.........</p>
+</div>
     <div class="adminDashboard">
         <h1 class="cursiveFont">Admin Panel</h1>
         <h5>What do you want to do?</h5>
@@ -15,7 +18,7 @@
           <h4>Home page</h4>
           
           <a class="adminbtn btn btn-primary">Change background video</a>
-          <a class="adminbtn btn btn-primary">Update header title/header text</a>
+          <a class="adminbtn btn btn-primary" href="#adminSection">Update header title/header text</a>
           <a class="adminbtn btn btn-primary">Update news section</a>
           <h4>About Section</h4>
           <a class="adminbtn btn btn-primary">Configure about section</a>
@@ -27,8 +30,40 @@
            <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
            <h4>Media Preview</h4>
            <div id="postsContainer"></div>
+           <!--Update Header-->
+
+           <div id="adminSection">
+            <h3>Update Header Content</h3>
+            <form id="headerForm">
+              <label for="titleInput">Title:</label>
+              <input type="text" id="titleInput" required><br>
+          
+              <label for="descriptionInput">Description:</label>
+              <textarea id="descriptionInput" rows="4" required></textarea><br>
+          
+              <label for="imageInput">Upload Photo:</label>
+              <input type="file" id="imageInput" accept="image/*"><br>
+          
+              <button type="submit">Update Header</button>
+            </form>
+          </div>
+          
+  <!--Header Update Preview-->
+       <!-- Header -->
+      
+      
+        <div class="headerText container" id="dynamicHeader">
+          <!-- Dynamic header content will be inserted here -->
         </div>
       </div>
+      </div>
+      </div>
+       
+      </div>
+
+
+    
+           
       <!--Modals-->
       <!--Create a post-->
       <!-- Button trigger modal -->
@@ -66,7 +101,9 @@
     </div>
   </div>
 </div>
-      
+ 
+
+
        
     </div>  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

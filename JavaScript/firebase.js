@@ -1,8 +1,7 @@
 
-// Import necessary Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, updateDoc,addDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, updateDoc,addDoc, setDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
 
 
@@ -17,15 +16,15 @@ const firebaseConfig = {
   measurementId: "G-EY02T4CGX4"
 };
 
-// Initialize Firebase app
+
 const app = initializeApp(firebaseConfig);
 
-// Get a reference to the database
+
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app); // Add this line to get the storage service
+const storage = getStorage(app);
 
-// Wait for the DOM to load before attaching the click event
+
 document.addEventListener("DOMContentLoaded", function () {
   const btnMain = document.getElementById("btnMain");
   const btnAdminLogin = document.getElementById("btnAdminLogin");
@@ -616,5 +615,164 @@ function displayPosts(posts) {
 document.addEventListener("DOMContentLoaded", function () {
   fetchAndDisplayPosts();
 });
+
+
+//fetchHeader
+
+// Fetch header content function
+async function fetchHeaderContent() {
+  try {
+    console.log('Fetching header content...');
+    const headerDoc = await getDoc(doc(db, 'header', 'headerDocument'));
+    
+    if (headerDoc.exists()) {
+      const headerData = headerDoc.data();
+      console.log('Header data:', headerData);
+      updateHeaderContent(headerData);
+    } else {
+      console.error("Header document not found.");
+    }
+  } catch (error) {
+    console.error("Error fetching header content: ", error);
+  }
+}
+
+
+// Update header content function
+function updateHeaderContent(headerData) {
+  const dynamicHeader = document.getElementById('dynamicHeader');
+  if (dynamicHeader) {
+    dynamicHeader.innerHTML = `
+    <div class="container-fluid w-100 vh-100 d-flex flex-column justify-content-center align-items-left text-white fs-4">
+    <div class="headerContainer container-fluid">
+    <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem" alt="header_logo">
+    </div>
+      <div class="headerTitle">
+        <h2 class="cursiveFont">${headerData.title}</h2>
+      </div>
+   
+      <p>${headerData.description}</p>
+      <button class="button-34"><a href=#news>Check out now!</a></button>
+    `;
+  } else {
+    console.error("Dynamic header container not found.");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log('DOM content loaded.');
+  fetchHeaderContent(); // Ensure this is called
+});
+
+
+
+
+//Input Form for Update Header Content Function
+
+// Add event listener to the form for updating header
+document.getElementById('headerForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  // Get values from the form
+  const title = document.getElementById('titleInput').value;
+  const description = document.getElementById('descriptionInput').value;
+
+  const imageInput = document.getElementById('imageInput');
+  const imageFile = imageInput.files[0];
+  const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
+
+  // Update header content in Firestore
+  updateHeaderInFirestore(title, description, imageUrl);
+});
+
+// Function to update header content in Firestore
+async function updateHeaderInFirestore(title, description, imageUrl) {
+  try {
+    // Assuming you have a document with ID 'headerDocument' in the 'header' collection
+    const headerDocRef = doc(db, 'header', 'headerDocument');
+    const headerData = {
+      title: title,
+      description: description,
+      imageUrl: imageUrl,
+    };
+
+    await setDoc(headerDocRef, headerData, { merge: true });
+    console.log('Header content updated successfully!');
+    alert('Header content updated successfully!');
+  } catch (error) {
+    console.error('Error updating header content:', error);
+    // Handle error appropriately
+  }
+}
+
+// Fetch and display header content function
+async function fetchAndDisplayHeaderContent() {
+  try {
+    const headerDoc = await getDoc(doc(db, 'header', 'headerDocument'));
+    if (headerDoc.exists()) {
+      const headerData = headerDoc.data();
+      updateHeaderContent(headerData);
+    } else {
+      console.error("Header document not found.");
+    }
+  } catch (error) {
+    console.error("Error fetching header content: ", error);
+  }
+}
+
+// Call the fetchAndDisplayHeaderContent function to initially load header content
+fetchAndDisplayHeaderContent();
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Display loading screen
+  showLoadingScreen();
+
+  // Fetch data from the database
+  fetchDataFromDatabase()
+      .then((data) => {
+          // Process your data here
+          console.log("Data fetched:", data);
+
+          // Hide loading screen if DOM content is loaded
+          if (document.readyState === "complete") {
+              hideLoadingScreen();
+          } else {
+              document.addEventListener("readystatechange", function () {
+                  if (document.readyState === "complete") {
+                      hideLoadingScreen();
+                  }
+              });
+          }
+      })
+      .catch((error) => {
+          console.error("Error fetching data:", error);
+
+          // Handle errors and hide loading screen
+          hideLoadingScreen();
+      });
+});
+
+function showLoadingScreen() {
+  // Show loading screen
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "flex";
+}
+
+function hideLoadingScreen() {
+  // Hide loading screen
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "none";
+}
+
+function fetchDataFromDatabase() {
+  // Simulate a fetch operation (replace with your actual fetch logic)
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          // Simulating a successful data fetch
+          resolve("Database data goes here");
+          // If there's an error, use reject(error)
+      }, 2000); // Simulating a 2-second fetch time
+  });
+}
 
 
