@@ -645,7 +645,7 @@ function updateHeaderContent(headerData) {
     dynamicHeader.innerHTML = `
     <div class="container-fluid w-100 vh-100 d-flex flex-column justify-content-center align-items-left text-white fs-4">
     <div class="headerContainer container-fluid">
-    <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem border-radius:20px" alt="header_logo">
+    <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem; border-radius:20px"; alt="header_logo">
       <div class="headerWrap">
       <div class="headerTitle">
         <h2 class="cursiveFont">${headerData.title}</h2>
