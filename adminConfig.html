@@ -23,67 +23,44 @@
           <h4>About Section</h4>
           <a class="adminbtn btn btn-primary">Configure about section</a>
           <h4>Media Section</h4>
-           <a class="adminbtn btn btn-primary" id="create-post-button">Create a post</a>
+           <a class="adminbtn btn btn-primary" href="#createPost">Create a post</a>
            <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
            <h4>Navigation</h4>
            <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
            <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
            <h4>Media Preview</h4>
            <div id="postsContainer"></div>
+          </div>
            <!--Update Header-->
-
+          <div class="newsPanelContainer2">
            <div id="adminSection">
             <h3>Update Header Content</h3>
             <form id="headerForm">
               <label for="titleInput">Title:</label>
-              <input type="text" id="titleInput" required><br>
+              <input class="form-control" type="text" id="titleInput" required><br>
           
               <label for="descriptionInput">Description:</label>
-              <textarea id="descriptionInput" rows="4" required></textarea><br>
+              <textarea class="form-control" id="descriptionInput" rows="4" required></textarea><br>
           
               <label for="imageInput">Upload Photo:</label>
-              <input type="file" id="imageInput" accept="image/*"><br>
+              <input class="form-control" type="file" id="imageInput" accept="image/*"><br>
           
-              <button type="submit">Update Header</button>
+              <button class="btn btn-primary" type="submit">Update Header</button>
             </form>
           </div>
-          
-  <!--Header Update Preview-->
-       <!-- Header -->
-      
-      
-        <div class="headerText container" id="dynamicHeader">
-          <!-- Dynamic header content will be inserted here -->
         </div>
-      </div>
-      </div>
-      </div>
-       
-      </div>
-
-
-    
-           
-      <!--Modals-->
-      <!--Create a post-->
-      <!-- Button trigger modal -->
-
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-netlify="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-light">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new post</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
         
-        <div class="mb-3">
+          <!--Non Modal Upload Post-->
+<br>
+      <div class="newsPanelContainer2">
+        <h3 id="createPost">Create a post</h3>
+        
+    
+     
              <!-- Image preview container -->
-      <div class="text-center mb-3">
+     
         <img id="image-preview" class="img-fluid rounded" alt="Preview">
-      </div>
+   
       
       <!-- File input and upload button -->
       <div class="custom-file">
@@ -91,16 +68,31 @@
       <br>
       </div>
           <label for="exampleFormControlTextarea1" class="form-label">Caption:</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea><br>
+        
+          <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button><br>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button>
+       
+  
       </div>
-    </div>
-  </div>
-</div>
+      
+      
+        <div class="headerText container" id="dynamicHeader">
+          <!-- Dynamic header content will be inserted here -->
+        </div>
+      
+      
+      
+       
+      
+
+
+    
+           
+      <!--Modals-->
+   
+
+
  
 
 

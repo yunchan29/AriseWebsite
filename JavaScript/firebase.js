@@ -646,13 +646,16 @@ function updateHeaderContent(headerData) {
     <div class="container-fluid w-100 vh-100 d-flex flex-column justify-content-center align-items-left text-white fs-4">
     <div class="headerContainer container-fluid">
     <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem" alt="header_logo">
-    </div>
+      <div class="headerWrap">
       <div class="headerTitle">
         <h2 class="cursiveFont">${headerData.title}</h2>
       </div>
    
       <p>${headerData.description}</p>
       <button class="button-34"><a href=#news>Check out now!</a></button>
+      </div>
+      </div>
+      </div>
     `;
   } else {
     console.error("Dynamic header container not found.");
@@ -667,7 +670,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-//Input Form for Update Header Content Function
+// Input Form for Update Header Content Function
 
 // Add event listener to the form for updating header
 document.getElementById('headerForm').addEventListener('submit', function (event) {
@@ -679,17 +682,27 @@ document.getElementById('headerForm').addEventListener('submit', function (event
 
   const imageInput = document.getElementById('imageInput');
   const imageFile = imageInput.files[0];
-  const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
 
   // Update header content in Firestore
-  updateHeaderInFirestore(title, description, imageUrl);
+  updateHeaderInFirestore(title, description, imageFile);
 });
 
 // Function to update header content in Firestore
-async function updateHeaderInFirestore(title, description, imageUrl) {
+async function updateHeaderInFirestore(title, description, imageFile) {
   try {
-    // Assuming you have a document with ID 'headerDocument' in the 'header' collection
     const headerDocRef = doc(db, 'header', 'headerDocument');
+
+    // Check if an image file is provided
+    let imageUrl = null;
+    if (imageFile) {
+      const storageRef = ref(storage, 'headerImages/' + imageFile.name);
+      const task = uploadBytes(storageRef, imageFile);
+
+      // Wait for the upload to complete and get the download URL
+      const snapshot = await task;
+      imageUrl = await getDownloadURL(snapshot.ref);
+    }
+
     const headerData = {
       title: title,
       description: description,
@@ -722,6 +735,7 @@ async function fetchAndDisplayHeaderContent() {
 
 // Call the fetchAndDisplayHeaderContent function to initially load header content
 fetchAndDisplayHeaderContent();
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Display loading screen

@@ -372,7 +372,10 @@ align-items: center;
 }
 
 .headerWrap{
-
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
 
@@ -382,6 +385,7 @@ align-items: center;
 
 .headerContainer{
 display:flex;
+
 
 
 }
@@ -587,7 +591,7 @@ color:white; }
 
 
 .newsPanelContainer{
-  width:50%;
+  width:70%;
   margin: auto;
   background:rgb(21, 21, 21,0.5);
   padding:30px;
@@ -752,7 +756,7 @@ cursor:pointer;
   border-radius: 12px;
 }
 .postConfig{
-  width:50%;
+  width:80%;
   margin: auto;
   background:rgb(21, 21, 21,0.5);
   padding:30px;
