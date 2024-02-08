@@ -19,7 +19,7 @@
           
           <a class="adminbtn btn btn-primary">Change background video</a>
           <a class="adminbtn btn btn-primary" href="#adminSection">Update header title/header text</a>
-          <a class="adminbtn btn btn-primary">Update news section</a>
+          <a class="adminbtn btn btn-primary" href="#newsSectionForm">Update news section</a>
           <h4>About Section</h4>
           <a class="adminbtn btn btn-primary">Configure about section</a>
           <h4>Media Section</h4>
@@ -49,19 +49,22 @@
             </form>
           </div>
         </div>
-
+<br>
                   <!-- Form for image upload -->
                   <div class="newsPanelContainer2">
+                    <h3 id="newsSectionForm">News Section Update</h3>
   <form id="imageUploadForm">
     <label for="imageTitle">Image Title:</label>
-    <input type="text" id="imageTitle" required>
+    <input class="form-control" type="text" id="imageTitle" required>
 
     <label for="imageFile">Select Image:</label>
-    <input type="file" id="imageFile" accept="image/*" required>
+    <input class="form-control" type="file" id="imageFile" accept="image/*" required>
 
-    <button type="submit">Upload Image</button>
+    <button class="btn btn-primary" type="submit">Upload Image</button>
   </form>
   </div>
+
+  <br>
         
           <!--Non Modal Upload Post-->
 <br>
