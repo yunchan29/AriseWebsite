@@ -19,34 +19,55 @@
         <!--Homepage Section-->
         
         <div class="adminPageWrap">
-          <!--Form-->
-          <div class="memberRegistration">
+ <!-- Form -->
+<div class="memberRegistration mx-auto">
+  <h3 class="cursiveFont">Member Registration</h3>
+  <h1 id="testing"></h1>
+  <div class="container-fluid mb-3">
 
-            <h3 class="cursiveFont">Member Registration</h3>
-            <h1 id="testing"></h1>
-            <div class="container-fluid mb-3">
-            
-              <label for="email" class="form-label">Email Address</label>
-              <div class="col-md-8">
-                <input type="email" class="form-control" id="email" placeholder="Enter your email address">
-                   </div>
-            
-          
- <label for="firstName" class="form-label">First Name</label>
- <div class="col-md-8">
-  <input type="firstName" class="form-control" id="firstName" placeholder="Enter your first name">
- </div>
- 
- <label for="lastName" class="form-label">Last Name</label>
- <div class="col-md-8"><input type="lastName" class="form-control" id="lastName" placeholder="Enter your last name"></div>
- 
- <label for="yearSection" class="form-label">Year/Section</label>
- <div class="col-md-8"><input type="yearSection" class="form-control" id="yearSection" placeholder="1-BSXX-#">
- </div>
- <label for="photo">Upload your photo:</label>
- <div class="col-md-8">
-  <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
- </div>
+    <!-- Email Address -->
+    <label for="email" class="form-label">Email Address</label>
+    <div class="col-md-8">
+      <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+    </div>
+
+    <!-- First Name -->
+    <label for="firstName" class="form-label">First Name</label>
+    <div class="col-md-8">
+      <input type="firstName" class="form-control" id="firstName" placeholder="Enter your first name">
+    </div>
+
+    <!-- Last Name -->
+    <label for="lastName" class="form-label">Last Name</label>
+    <div class="col-md-8">
+      <input type="lastName" class="form-control" id="lastName" placeholder="Enter your last name">
+    </div>
+
+    <!-- Year/Section Dropdown -->
+    <label for="yearSection" class="form-label">Program/Course</label>
+    <div class="col-md-8">
+      <select class="form-select" id="yearSection" aria-label="Year/Section">
+        <option value="BSE-S">Bachelor of Secondary Education-Science</option>
+        <option value="BSE-M">Bachelor of Secondary Education-Mathematics</option>
+        <option value="BSE-E">Bachelor of Secondary Education-English</option>
+        <option value="BSP">Bachelor of Science in Psychology</option>
+        <option value="BSIT">Bachelor of Science in Information Technology</option>
+        <option value="BSCS">Bachelor of Science in Computer Science</option>
+        <option value="BSAIS">Bachelor of Science in Accountancy and Information System</option>
+        <option value="BSA">Bachelor of Science in Accountancy</option>
+        <option value="BEE">Bachelor of Elementary Education</option>
+        <option value="BECE">Bachelor in Early Childhood Education</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+
+    <!-- Photo Upload -->
+    <label for="photo">Upload your photo:</label>
+    <div class="col-md-8">
+      <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+    </div>
+  </div>
+
 
 
  
@@ -72,7 +93,7 @@
     </div>
   </div>
 </div>
-<div class="col-auto">
+<div class="col-md-8">
     <button id="btnMain" class="btn btn-primary mb-3 mt-3">Submit</button>
   </div>
 </div>

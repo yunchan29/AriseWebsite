@@ -299,7 +299,7 @@ function closeModal() {
         <img style="border-radius:20px; margin:10px; cursor: pointer;" src="${member.photo}" alt="Member Photo" onclick="showLargerImage('${member.photo}')"><br>
             <p>Email: ${member.email}</p>
             <p>Name: ${member.firstName} ${member.lastName}</p>
-            <p>Year/Section: ${member.yearSection}</p>
+            <p>Program/Course: ${member.yearSection}</p>
             
             <button class="btn btn-primary edit-btn" data-member-id="${memberId}">Edit</button>
             <button class="btn btn-primary delete-btn" data-member-id="${memberId}">Delete</button>
@@ -645,7 +645,7 @@ function updateHeaderContent(headerData) {
     dynamicHeader.innerHTML = `
     <div class="container-fluid w-100 vh-100 d-flex flex-column justify-content-center align-items-left text-white fs-4">
     <div class="headerContainer container-fluid">
-    <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem; border-radius:20px"; alt="header_logo">
+    <img class="img-fluid" src="${headerData.imageUrl}" class="headerImage" style="width:20rem; border-radius:20px; max-height:40rem;  box-shadow: #3a02dd 0 10px 20px -10px;" alt="header_logo">
       <div class="headerWrap">
       <div class="headerTitle">
         <h2 class="cursiveFont">${headerData.title}</h2>

@@ -380,6 +380,7 @@ margin-left: 5%;
 }
 .headerImage{
   border-radius: 12px;
+  box-shadow: #3a02dd 0 10px 20px -10px;
 }
 .headerLogo{
 
@@ -448,7 +449,12 @@ display:flex;
 
 .cursiveFont{
   font-family: 'Valorant', sans-serif;
-  font-size:4vw;
+  font-size:5vw;
+}
+@media(max-width:991px){
+  .cursiveFont{
+    font-size: 4.5vw;
+  }
 }
 
 .loginPage{
@@ -683,8 +689,9 @@ cursor:pointer;
 
 .adminbtn{
   width: 50%;
-  
+  display: flex;
   margin:5px;
+  
 
 }
 
@@ -758,7 +765,7 @@ cursor:pointer;
   border-radius: 12px;
 }
 .postConfig{
-  width:80%;
+  width:50%;
   margin: auto;
   background:rgb(21, 21, 21,0.5);
   padding:30px;
@@ -809,6 +816,24 @@ cursor:pointer;
     
     width: 100%;
     border-radius: 12px;
+  }
+  .postConfig{
+    width:80%;
+    margin: auto;
+    background:rgb(21, 21, 21,0.5);
+    padding:30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px rgb(2, 20, 102);
+    scrollbar-width: none;  /* Firefox */
+   -ms-overflow-style: none;  /* IE and Edge */
+   margin-bottom: 10%;
+   text-align: left;
+   
   }
   
 }
