@@ -801,5 +801,122 @@ function fetchDataFromDatabase() {
       }, 2000); // Simulating a 2-second fetch time
   });
 }
+//NEWS
+// Reference to the Firestore collection
+const newsCollection = collection(db, 'news');  // Assuming you have already initialized 'db' with getFirestore
+
+// Reference to the container in which news items will be appended
+const newsContainer = document.getElementById('newsContainer');
+
+// Fetch news data from Firestore
+getDocs(newsCollection).then((querySnapshot) => {
+  console.log('Fetching news data from Firestore...');
+  querySnapshot.forEach((doc) => {
+    const newsItem = doc.data();
+    createNewsItem(newsItem);
+  });
+});
+
+
+// Function to create a news item and append it to the container
+function createNewsItem(newsItem) {
+  // Create a column div
+  const column = document.createElement('div');
+  column.className = 'column';
+
+  // Create a link with the news image
+  const link = document.createElement('a');
+  link.href = newsItem.link; // Replace 'link' with the actual field in your Firestore document
+  link.target = '_blank';
+
+  // Create an image element
+  const image = document.createElement('img');
+  image.className = 'newsImg';
+  image.src = newsItem.imageUrl; // Replace 'imageUrl' with the actual field in your Firestore document
+  image.alt = '';
+
+  // Append the image to the link, and the link to the column
+  link.appendChild(image);
+  column.appendChild(link);
+
+  // Append the column to the news container
+  newsContainer.appendChild(column);
+}
+
+// Reference to the image upload form
+const imageUploadForm = document.getElementById('imageUploadForm');
+
+imageUploadForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const imageTitle = document.getElementById('imageTitle').value;
+  const imageFile = document.getElementById('imageFile').files[0];
+
+  if (!imageTitle || !imageFile) {
+    alert('Please provide both title and image file.');
+    console.warn('Title or image file missing. Aborting image upload.');
+    return;
+  }
+
+  // Create a unique filename for the image
+  const timestamp = new Date().getTime();
+  const fileName = `${timestamp}_${imageFile.name}`;
+
+  // Reference to the Storage path where the image will be stored
+const storageRef = ref(storage, `news_images/${fileName}`);
+
+
+  try {
+   
+   // Upload the image to Storage
+await uploadBytes(storageRef, imageFile);
+
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(storageRef);
+
+
+    // Save image details to Firestore Database
+    await addDoc(newsCollection, {
+      link: '#', // Add the appropriate link
+      imageUrl: downloadURL,
+    });
+    
+    console.log('Image uploaded successfully!');
+    alert('Image uploaded successfully!');
+
+    // Clear the form
+    imageUploadForm.reset();
+
+    // Fetch and display updated news content
+    fetchNews();
+  } catch (error) {
+    console.error('Error uploading image:', error.message);
+    alert('Error uploading image. Please try again.');
+  }
+});
+
+// Additional check to prevent form submission elsewhere in the code
+document.getElementById('imageUploadForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+});
+
+// Function to fetch and display news from Firestore
+async function fetchNews() {
+  console.log('Fetching and displaying news...');
+  newsContainer.innerHTML = '';
+
+  try {
+    const newsCollection = collection(db, 'news');
+    const newsSnapshot = await getDocs(newsCollection);
+
+    newsSnapshot.forEach((doc) => {
+      const newsItem = doc.data();
+      createNewsItem(newsItem);
+    });
+  } catch (error) {
+    console.error('Error fetching news:', error);
+  }
+}
 
 

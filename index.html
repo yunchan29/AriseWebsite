@@ -18,9 +18,10 @@
 
         
         <div class="headerLogo">
-          <video autoplay loop muted plays-inline class="back-video">
+          <video autoplay loop muted playsinline class="back-video">
             <source src="/Pictures/header_video.mp4" type="video/mp4">
           </video>
+          
         <!--Background-->
       
       <div class="home_background">
@@ -62,32 +63,7 @@
 <button id="btnAdmin" style="display: none;">Button Admin</button>
 <button id="btnAdminLogout" style="display: none;">Button Admin Logout</button>
       
-        <div class="news reveal">
-          <div class="row">
-            <div class="column">
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid02zptddMfNvWm4XexXLhPym14C3pfmxtDLnT2njd8bKGLyYBAGDoxNCMzRm6U7xGhHl" target="_blank"><img class="newsImg" src="/Pictures/arisingRadiants.jpg"alt="">
-              </a>
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid08NpqcVwxYmgT5LhKsVDWGeUajAwTu6X8H3Ln5M2PLradUWXsnhamdMW87prefKKYl" target="_blank"><img class="newsImg" src="/Pictures/salvaging_legends.jpg"alt="">
-            </a>
-              <a href="https://www.facebook.com/photo/?fbid=688956980007778&set=a.406827674887378" target="_blank"><img class="newsImg" src="/Pictures/events/raffledraw.jpg" alt="">
-            </a>
-             
-            </div>
-            <div class="column">
-              
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid08NpqcVwxYmgT5LhKsVDWGeUajAwTu6X8H3Ln5M2PLradUWXsnhamdMW87prefKKYl" target="_blank"><img class="newsImg" src="/Pictures/events/salvagingLegendsReg.jpg"alt=""></a>
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid028ZrXokH2t9X4rVRmnS9kxRGJ1GMwC6DGHZwbgwgnXUEmJqVrPFoCDioBaUdERvY9l" target="_blank"><img class="newsImg" src="/Pictures/events/tornado_champion.jpg" alt=""></a>
-
-             
-            </div>
-            <div class="column">
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid06rUUvYNHVoBD8xXJ9sdpSspBaFzDp1Rwv4AUL2RmW2XVUe7BTHtdHNZtdyqEKtvGl" target="_blank"><img class="newsImg" src="/Pictures/merch/merch cover.jpg"alt=""></a>
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid06rUUvYNHVoBD8xXJ9sdpSspBaFzDp1Rwv4AUL2RmW2XVUe7BTHtdHNZtdyqEKtvGl" target="_blank"><img class="newsImg" src="/Pictures/merch/cotton v1.jpg"alt=""></a>
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid06rUUvYNHVoBD8xXJ9sdpSspBaFzDp1Rwv4AUL2RmW2XVUe7BTHtdHNZtdyqEKtvGl" target="_blank"><img class="newsImg" src="/Pictures/merch/cotton v2.jpg"alt=""></a>
-              <a href="https://www.facebook.com/CCCAriseEsports/posts/pfbid06rUUvYNHVoBD8xXJ9sdpSspBaFzDp1Rwv4AUL2RmW2XVUe7BTHtdHNZtdyqEKtvGl" target="_blank"><img class="newsImg" src="/Pictures/merch/drifit.jpg" alt=""></a>
-              
-              
-            </div>
+<div class="news reveal" id="newsContainer"></div>
             
           </div>
           
@@ -126,11 +102,25 @@
           
           
               <button type="submit">Update Header</button>
+            
             </form>
+                      <!-- Form for image upload -->
+  <form id="imageUploadForm">
+    <label for="imageTitle">Image Title:</label>
+    <input type="text" id="imageTitle" required>
+
+    <label for="imageFile">Select Image:</label>
+    <input type="file" id="imageFile" accept="image/*" required>
+
+    <button type="submit">Upload Image</button>
+  </form>
           </div>
            <div id="membersContainer"></div>
           </div>  
           </div>
+  
+
+</div>
           <footer class="bg-dark text-white text-center py-3">
             <div class="container">
               <p>&copy; Arise Esports. All rights reserved 2023.</p>
