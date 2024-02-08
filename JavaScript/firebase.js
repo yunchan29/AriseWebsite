@@ -174,6 +174,19 @@ async function logInAdmin() {
   }
 }
 
+// Add keypress event listener for the "Enter" key
+document.addEventListener('DOMContentLoaded', function () {
+  const adminPasswordInput = document.getElementById('adminPassword');
+
+  adminPasswordInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      // "Enter" key is pressed, trigger the login function
+      logInAdmin();
+    }
+  });
+});
+
+
 // Log out admin function
 async function logOutAdmin() {
   // Auth
