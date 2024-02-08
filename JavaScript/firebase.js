@@ -803,10 +803,13 @@ function fetchDataFromDatabase() {
 }
 //NEWS
 // Reference to the Firestore collection
-const newsCollection = collection(db, 'news');  // Assuming you have already initialized 'db' with getFirestore
+const newsCollection = collection(db, 'news');
 
 // Reference to the container in which news items will be appended
 const newsContainer = document.getElementById('newsContainer');
+// Apply styles directly to the container
+newsContainer.style.display = 'flex';
+newsContainer.style.flexWrap = 'wrap';
 
 // Fetch news data from Firestore
 getDocs(newsCollection).then((querySnapshot) => {
@@ -817,12 +820,14 @@ getDocs(newsCollection).then((querySnapshot) => {
   });
 });
 
-
 // Function to create a news item and append it to the container
 function createNewsItem(newsItem) {
   // Create a column div
   const column = document.createElement('div');
-  column.className = 'column';
+  // Apply styles directly using the style property
+  column.style.flex = '0 0 33.33%'; // 3 columns in a row
+  column.style.maxWidth = '33.33%';
+  column.style.padding = '0 5px';
 
   // Create a link with the news image
   const link = document.createElement('a');
@@ -835,6 +840,11 @@ function createNewsItem(newsItem) {
   image.src = newsItem.imageUrl; // Replace 'imageUrl' with the actual field in your Firestore document
   image.alt = '';
 
+  // Apply styles directly to the image
+  image.style.marginTop = '15px';
+  image.style.verticalAlign = 'middle';
+  image.style.width = '80%';
+
   // Append the image to the link, and the link to the column
   link.appendChild(image);
   column.appendChild(link);
@@ -842,6 +852,8 @@ function createNewsItem(newsItem) {
   // Append the column to the news container
   newsContainer.appendChild(column);
 }
+
+
 
 // Reference to the image upload form
 const imageUploadForm = document.getElementById('imageUploadForm');
@@ -863,25 +875,21 @@ imageUploadForm.addEventListener('submit', async (event) => {
   const fileName = `${timestamp}_${imageFile.name}`;
 
   // Reference to the Storage path where the image will be stored
-const storageRef = ref(storage, `news_images/${fileName}`);
-
+  const storageRef = ref(storage, `news_images/${fileName}`);
 
   try {
-   
-   // Upload the image to Storage
-await uploadBytes(storageRef, imageFile);
-
+    // Upload the image to Storage
+    await uploadBytes(storageRef, imageFile);
 
     // Get the download URL of the uploaded image
     const downloadURL = await getDownloadURL(storageRef);
-
 
     // Save image details to Firestore Database
     await addDoc(newsCollection, {
       link: '#', // Add the appropriate link
       imageUrl: downloadURL,
     });
-    
+
     console.log('Image uploaded successfully!');
     alert('Image uploaded successfully!');
 
@@ -918,5 +926,3 @@ async function fetchNews() {
     console.error('Error fetching news:', error);
   }
 }
-
-
