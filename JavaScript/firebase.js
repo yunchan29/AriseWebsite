@@ -52,24 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-// Function to initialize the page
-document.addEventListener('DOMContentLoaded', function () {
-  // Hide loading overlay initially
-  hideLoadingOverlay();
-
-  // Attach the registerMember function to the button click event
-  const registerButton = document.getElementById('registerButton');
-  if (registerButton) {
-    registerButton.addEventListener('click', registerMember);
-  }
-});
-
 // Register member function
 async function registerMember() {
-  // Show loading overlay
-  showLoadingOverlay();
-
   console.log("Registering member...");
 
   const email = document.getElementById('email').value;
@@ -79,7 +63,6 @@ async function registerMember() {
 
   // Validate input fields
   if (!validate_email(email) || !validate_field(firstName) || !validate_field(lastName) || !validate_field(yearSection)) {
-    hideLoadingOverlay(); // Hide loading overlay on validation failure
     alert("Invalid input. Please check your details.");
     return;
   }
@@ -88,7 +71,6 @@ async function registerMember() {
   const photoFile = photoInput.files[0];
 
   if (!photoFile) {
-    hideLoadingOverlay(); // Hide loading overlay if no photo is uploaded
     alert("Please upload a photo.");
     return;
   }
@@ -110,12 +92,12 @@ async function registerMember() {
       console.log("Adding document to Firestore:", userData);
       const docRef = await addDoc(userRef, userData);
 
-      // Clear input fields after successful registration
-      document.getElementById('email').value = '';
-      document.getElementById('firstName').value = '';
-      document.getElementById('lastName').value = '';
-      document.getElementById('yearSection').value = '';
-      document.getElementById('photo').value = '';
+       // Clear input fields after successful registration
+       document.getElementById('email').value = '';
+       document.getElementById('firstName').value = '';
+       document.getElementById('lastName').value = '';
+       document.getElementById('yearSection').value = '';
+       document.getElementById('photo').value = '';
 
       var myModal = new bootstrap.Modal(document.getElementById('myModal'));
       myModal.show();
@@ -125,24 +107,11 @@ async function registerMember() {
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Failed to save user data. Please try again.");
-    } finally {
-      hideLoadingOverlay(); // Ensure loading overlay is hidden regardless of success or failure
     }
   };
 
   reader.readAsDataURL(photoFile);
 }
-
-function showLoadingOverlay() {
-  const loadingOverlay = document.getElementById('loadingOverlay');
-  loadingOverlay.style.display = 'flex';
-}
-
-function hideLoadingOverlay() {
-  const loadingOverlay = document.getElementById('loadingOverlay');
-  loadingOverlay.style.display = 'none';
-}
-
 
 // Register admin function
 async function registerAdmin() {
@@ -179,29 +148,13 @@ async function registerAdmin() {
   }
 }
 
-// Function to initialize the page
-document.addEventListener('DOMContentLoaded', function () {
-  // Hide loading overlay initially
-  hideLoadingOverlay();
-
-  // Attach the logInAdmin function to the login button click event
-  const loginButton = document.getElementById('loginButton');
-  if (loginButton) {
-    loginButton.addEventListener('click', logInAdmin);
-  }
-});
-
 // Log in admin function
 async function logInAdmin() {
-  // Show loading overlay
-  showLoadingOverlay();
-
   const email = document.getElementById('adminEmail').value;
   const password = document.getElementById('adminPassword').value;
 
   // Validate input fields
   if (!validate_email(email) || !validate_password(password)) {
-    hideLoadingOverlay(); // Hide loading overlay on validation failure
     alert("Invalid Email or Password");
     return;
   }
@@ -218,11 +171,8 @@ async function logInAdmin() {
   } catch (error) {
     console.error("Error during login: ", error);
     alert("Invalid email or password. Please try again.");
-  } finally {
-    hideLoadingOverlay(); // Ensure loading overlay is hidden regardless of success or failure
   }
 }
-
 
 // Add keypress event listener for the "Enter" key
 document.addEventListener('DOMContentLoaded', function () {
@@ -235,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-
 
 
 // Log out admin function
