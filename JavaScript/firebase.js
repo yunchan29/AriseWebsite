@@ -853,8 +853,6 @@ function createNewsItem(newsItem) {
   newsContainer.appendChild(column);
 }
 
-
-
 // Reference to the image upload form
 const imageUploadForm = document.getElementById('imageUploadForm');
 
@@ -875,21 +873,25 @@ imageUploadForm.addEventListener('submit', async (event) => {
   const fileName = `${timestamp}_${imageFile.name}`;
 
   // Reference to the Storage path where the image will be stored
-  const storageRef = ref(storage, `news_images/${fileName}`);
+const storageRef = ref(storage, `news_images/${fileName}`);
+
 
   try {
-    // Upload the image to Storage
-    await uploadBytes(storageRef, imageFile);
+   
+   // Upload the image to Storage
+await uploadBytes(storageRef, imageFile);
+
 
     // Get the download URL of the uploaded image
     const downloadURL = await getDownloadURL(storageRef);
+
 
     // Save image details to Firestore Database
     await addDoc(newsCollection, {
       link: '#', // Add the appropriate link
       imageUrl: downloadURL,
     });
-
+    
     console.log('Image uploaded successfully!');
     alert('Image uploaded successfully!');
 
@@ -909,6 +911,9 @@ document.getElementById('imageUploadForm').addEventListener('submit', function (
   e.preventDefault();
 });
 
+
+
+
 // Function to fetch and display news from Firestore
 async function fetchNews() {
   console.log('Fetching and displaying news...');
@@ -926,3 +931,9 @@ async function fetchNews() {
     console.error('Error fetching news:', error);
   }
 }
+
+
+
+
+
+
