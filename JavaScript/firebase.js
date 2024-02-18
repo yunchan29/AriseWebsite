@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, updateDoc,addDoc, setDoc} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js";
 
 
 // Firebase configuration
@@ -23,6 +23,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+
+
+
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -751,9 +757,12 @@ document.getElementById('headerForm').addEventListener('submit', function (event
   updateHeaderInFirestore(title, description, imageFile);
 });
 
+
 // Function to update header content in Firestore
 async function updateHeaderInFirestore(title, description, imageFile) {
   try {
+    showLoadingOverlay(); // Show loading overlay while updating
+
     const headerDocRef = doc(db, 'header', 'headerDocument');
 
     // Check if an image file is provided
@@ -779,6 +788,8 @@ async function updateHeaderInFirestore(title, description, imageFile) {
   } catch (error) {
     console.error('Error updating header content:', error);
     // Handle error appropriately
+  } finally {
+    hideLoadingOverlay(); // Hide loading overlay after updating
   }
 }
 
@@ -830,17 +841,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 });
 
-function showLoadingScreen() {
-  // Show loading screen
-  const loadingScreen = document.getElementById("loading-screen");
-  loadingScreen.style.display = "flex";
-}
-
-function hideLoadingScreen() {
-  // Hide loading screen
-  const loadingScreen = document.getElementById("loading-screen");
-  loadingScreen.style.display = "none";
-}
 
 function fetchDataFromDatabase() {
   // Simulate a fetch operation (replace with your actual fetch logic)
@@ -852,63 +852,139 @@ function fetchDataFromDatabase() {
       }, 2000); // Simulating a 2-second fetch time
   });
 }
-//NEWS
-// Reference to the Firestore collection
+
+// Function to show loading screen
+function showLoadingScreen() {
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "flex";
+}
+
+// Function to hide loading screen
+function hideLoadingScreen() {
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "none";
+}
+
+//News Section
+
+// Constants for Firestore and Storage references
 const newsCollection = collection(db, 'news');
+const storageRef = ref(storage, 'news_images');
 
-// Reference to the container in which news items will be appended
+// Reference to the news container
 const newsContainer = document.getElementById('newsContainer');
-// Apply styles directly to the container
-newsContainer.style.display = 'flex';
-newsContainer.style.flexWrap = 'wrap';
 
-// Fetch news data from Firestore
-getDocs(newsCollection).then((querySnapshot) => {
-  console.log('Fetching news data from Firestore...');
-  querySnapshot.forEach((doc) => {
-    const newsItem = doc.data();
-    createNewsItem(newsItem);
-  });
-});
-
-// Function to create a news item and append it to the container
-function createNewsItem(newsItem) {
-  // Create a column div
+// Update createNewsItemElement function
+// Function to create a news item element
+function createNewsItemElement(newsItem, isAdmin) {
   const column = document.createElement('div');
-  // Apply styles directly using the style property
-  column.style.flex = '0 0 33.33%'; // 3 columns in a row
-  column.style.maxWidth = '33.33%';
-  column.style.padding = '0 5px';
+  column.classList.add('news-column'); // Add a common class for styling
 
-  // Create a link with the news image
   const link = document.createElement('a');
-  link.href = newsItem.link; // Replace 'link' with the actual field in your Firestore document
+  link.href = newsItem.link || '#';
   link.target = '_blank';
 
-  // Create an image element
   const image = document.createElement('img');
   image.className = 'newsImg';
-  image.src = newsItem.imageUrl; // Replace 'imageUrl' with the actual field in your Firestore document
+  image.src = newsItem.imageUrl;
   image.alt = '';
-
-  // Apply styles directly to the image
   image.style.marginTop = '15px';
   image.style.verticalAlign = 'middle';
   image.style.width = '80%';
 
-  // Append the image to the link, and the link to the column
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'deleteBtn btn btn-danger';
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.dataset.newsId = newsItem.id;
+
   link.appendChild(image);
   column.appendChild(link);
+  column.appendChild(deleteBtn);
 
-  // Append the column to the news container
-  newsContainer.appendChild(column);
+  // Add a class to the column based on the user type
+  if (isAdmin) {
+    column.classList.add('admin-container');
+  } else {
+    column.classList.add('user-container');
+  }
+
+  return column;
 }
 
-// Reference to the image upload form
-const imageUploadForm = document.getElementById('imageUploadForm');
 
-imageUploadForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+
+
+// Function to fetch and display news from Firestore
+async function fetchAndDisplayNews() {
+  showLoadingOverlay(); // Show loading overlay while fetching
+
+  console.log('Fetching and displaying news...');
+  newsContainer.innerHTML = '';
+
+  try {
+    const newsSnapshot = await getDocs(newsCollection);
+
+    newsSnapshot.forEach((doc) => {
+      const newsItem = { id: doc.id, ...doc.data() };
+      const newsItemElement = createNewsItemElement(newsItem);
+      newsContainer.appendChild(newsItemElement);
+    });
+
+    hideLoadingOverlay(); // Hide loading overlay after fetching
+  } catch (error) {
+    console.error('Error fetching news:', error);
+    hideLoadingOverlay(); // Ensure loading overlay is hidden in case of an error
+  }
+}
+
+async function deleteNewsItem(newsItemId) {
+  showLoadingOverlay();
+
+  try {
+    const newsDocRef = doc(newsCollection, newsItemId);
+    const newsItem = (await getDoc(newsDocRef)).data();
+
+    // Delete the news item from Firestore
+    await deleteDoc(newsDocRef);
+
+    // Delete the corresponding image from Storage using a safer storage path
+    const storagePath = `news_images/${newsItemId}`;
+    const fileRef = ref(storage, storagePath);
+
+    // Check if the file exists before attempting to delete
+    const exists = await getDownloadURL(fileRef).then(() => true).catch(() => false);
+
+    if (exists) {
+      await deleteObject(fileRef);
+      console.log('News item deleted successfully!');
+      alert('News item deleted successfully!');
+    } else {
+      console.warn('File does not exist in Storage. Skipping deletion.');
+    }
+
+    hideLoadingOverlay();
+    fetchAndDisplayNews();
+  } catch (error) {
+    console.error('Error deleting news item:', error);
+    alert('Error deleting news item. Please try again.');
+    hideLoadingOverlay();
+  }
+}
+
+
+
+// Event listener for delete button
+newsContainer.addEventListener('click', function (event) {
+  const deleteButton = event.target.closest('.deleteBtn');
+  if (deleteButton) {
+    const newsItemId = deleteButton.dataset.newsId;
+    deleteNewsItem(newsItemId);
+  }
+});
+
+// Function to upload news with image
+async function uploadNews() {
+  showLoadingOverlay(); // Show loading overlay while uploading
 
   const imageTitle = document.getElementById('imageTitle').value;
   const imageFile = document.getElementById('imageFile').files[0];
@@ -916,75 +992,49 @@ imageUploadForm.addEventListener('submit', async (event) => {
   if (!imageTitle || !imageFile) {
     alert('Please provide both title and image file.');
     console.warn('Title or image file missing. Aborting image upload.');
+    hideLoadingOverlay(); // Hide loading overlay if upload is aborted
     return;
   }
 
-  // Create a unique filename for the image
-  const timestamp = new Date().getTime();
-  const fileName = `${timestamp}_${imageFile.name}`;
-
-  // Reference to the Storage path where the image will be stored
-const storageRef = ref(storage, `news_images/${fileName}`);
-
-
   try {
-   
-   // Upload the image to Storage
-await uploadBytes(storageRef, imageFile);
+    const timestamp = new Date().getTime();
+    const fileName = `${timestamp}_${imageFile.name}`;
 
+    const storagePath = `news_images/${fileName}`;
+    const fileRef = ref(storage, storagePath);
+
+    // Upload the image to Storage
+    await uploadBytes(fileRef, imageFile);
 
     // Get the download URL of the uploaded image
-    const downloadURL = await getDownloadURL(storageRef);
-
+    const downloadURL = await getDownloadURL(fileRef);
 
     // Save image details to Firestore Database
     await addDoc(newsCollection, {
       link: '#', // Add the appropriate link
       imageUrl: downloadURL,
     });
-    
+
+    hideLoadingOverlay(); // Hide loading overlay after successful upload
     console.log('Image uploaded successfully!');
     alert('Image uploaded successfully!');
 
     // Clear the form
-    imageUploadForm.reset();
+    document.getElementById('imageUploadForm').reset();
 
     // Fetch and display updated news content
-    fetchNews();
+    fetchAndDisplayNews();
   } catch (error) {
     console.error('Error uploading image:', error.message);
     alert('Error uploading image. Please try again.');
-  }
-});
-
-// Additional check to prevent form submission elsewhere in the code
-document.getElementById('imageUploadForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-});
-
-
-
-
-// Function to fetch and display news from Firestore
-async function fetchNews() {
-  console.log('Fetching and displaying news...');
-  newsContainer.innerHTML = '';
-
-  try {
-    const newsCollection = collection(db, 'news');
-    const newsSnapshot = await getDocs(newsCollection);
-
-    newsSnapshot.forEach((doc) => {
-      const newsItem = doc.data();
-      createNewsItem(newsItem);
-    });
-  } catch (error) {
-    console.error('Error fetching news:', error);
+    hideLoadingOverlay(); // Hide loading overlay if there's an error
   }
 }
 
+// Event listener for image upload button
+document.getElementById('uploadNewsBtn').addEventListener('click', function () {
+  uploadNews();
+});
 
-
-
-
-
+// Initial fetch and display of news
+fetchAndDisplayNews();

@@ -15,6 +15,9 @@
     <div id="loading-screen">
       <p>Fetching data from database.........</p>
   </div>
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
 
         
         <div class="headerLogo">
@@ -57,13 +60,13 @@
       </div>
       <!--News Section-->
     <div class="newsSection">
-      <h2 id="news" class="cursiveFont reveal">News</h2>
+      <h2 id="news" class="cursiveFont">News</h2>
       <button id="btnMain" style="display: none;">Button Main</button>
 <button id="btnAdminLogin" style="display: none;">Button Admin Login</button>
 <button id="btnAdmin" style="display: none;">Button Admin</button>
 <button id="btnAdminLogout" style="display: none;">Button Admin Logout</button>
       
-<div class="news reveal" id="newsContainer"></div>
+<div class="news" id="newsContainer"></div>
             
           </div>
           
@@ -72,52 +75,213 @@
             </div>
             <!--Invisible Admin Panel for functions to work-->
             <div class="invisibleString" style="display: none;">
-            <h1 class="cursiveFont">Admin Panel</h1>
-        <h5>What do you want to do?</h5>
-        <div class="newsPanelContainer">
-          <h4>Home page</h4>
+              <h1 class="cursiveFont">Admin Panel</h1>
+              <h5>What do you want to configure?</h5>
+              <div class="newsPanelContainer">
+                <h4>Home page</h4>
+                
+                <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#headerPreview">Header Preview</a>
+                <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateHeaderModal">Update header title/header text</a>
+                <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsSectionModal">Add News Item</a>
+                <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Preview/Delete News Item</a>
+                <h4>About Section</h4>
+                <a class="adminbtn btn btn-primary">Configure about section</a>
+                <h4>Media Section</h4>
+                 <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">Create a post</a>
+                 <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
+                 <a class="adminbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#mediaPreviewModal">Media Preview</a>
+                 <h4>Navigation</h4>
+                 <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
+                 <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
+                
+      
+             </div>
+            </div>
+                 <!--Media Preview-->
+      
+      <!-- Media Preview Modal -->
+      <div class="modal fade" id="mediaPreviewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="previewModalLabel" style="color:white;">Media Preview</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+                 <div id="postsContainer"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                 
+              
+      
+      
+                 
+      <!-- Update Header Modal -->
+      <div class="modal fade" id="updateHeaderModal" tabindex="-1" aria-labelledby="updateHeaderModallabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="updateHeaderModalTitle" style="color:white;">Update Header Content</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             <!--Update Header-->
+             
+              <div id="adminSection">
+             
+               <form id="headerForm">
+                 <label for="titleInput">Title:</label>
+                 <input class="form-control" type="text" id="titleInput" required><br>
+             
+                 <label for="descriptionInput">Description:</label>
+                 <textarea class="form-control" id="descriptionInput" rows="4" required></textarea><br>
+             
+                 <label for="imageInput">Upload Photo:</label>
+                 <input class="form-control" type="file" id="imageInput" accept="image/*"><br>
+             
+                 
+              
+             </div>
           
-          <a class="adminbtn btn btn-primary">Change background video</a>
-          <a class="adminbtn btn btn-primary" href="#adminSection">Update header title/header text</a>
-          <a class="adminbtn btn btn-primary">Update news section</a>
-          <h4>About Section</h4>
-          <a class="adminbtn btn btn-primary">Configure about section</a>
-          <h4>Media Section</h4>
-           <a class="adminbtn btn btn-primary" id="create-post-button">Create a post</a>
-           <a class="adminbtn btn btn-secondary">Edit/Delete a Post</a>
-           <h4>Navigation</h4>
-           <a href="adminPage.html" class="adminbtn btn btn-primary">Back</a>
-           <a id="btnAdminLogout"  class="adminbtn btn btn-danger">Log out</a>
-           <h4>Media Preview</h4>
-           <div id="postsContainer"></div>
-           <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button>
-           <div id="adminSection">
-            <h3>Update Header Content</h3>
-            <form id="headerForm">
-              <label for="titleInput">Title:</label>
-              <input type="text" id="titleInput" required><br>
-          
-              <label for="descriptionInput">Description:</label>
-              <textarea id="descriptionInput" rows="4" required></textarea><br>
-          
-          
-              <button type="submit">Update Header</button>
-            
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Update Header</button>
             </form>
-                      <!-- Form for image upload -->
-  <form id="imageUploadForm">
-    <label for="imageTitle">Image Title:</label>
-    <input type="text" id="imageTitle" required>
-
-    <label for="imageFile">Select Image:</label>
-    <input type="file" id="imageFile" accept="image/*" required>
-
-    <button type="submit">Upload Image</button>
-  </form>
+            </div>
           </div>
-           <div id="membersContainer"></div>
-          </div>  
+        </div>
+      </div>
+      <br>
+                        <!-- Form for image upload -->
+                    
+      <!-- News Section Modal -->
+      <div class="modal fade" id="newsSectionModal" tabindex="-1" aria-labelledby="newsSectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:white;">News Section Update</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="imageUploadForm" enctype="multipart/form-data">
+              <div class="modal-body">
+                <label for="imageTitle">Image Title:</label>
+                <input class="form-control" type="text" id="imageTitle" required>
+      
+                <label for="imageFile">Select Image:</label>
+                <input class="form-control" type="file" id="imageFile" accept="image/*" required>
+              </div>
+      
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="uploadNewsBtn">Upload Image</button>
+              </div>
+            </form>
           </div>
+        </div>
+      </div>
+      
+      
+      
+              
+                <!--Non Modal Upload Post-->
+      
+        
+            <!-- Button trigger modal -->
+      
+      
+      <!-- Modal -->
+      <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="createPostModalLabel" style="color:white;">Create a post</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             
+             
+                
+            
+             
+                     <!-- Image preview container -->
+             
+                <img id="image-preview" class="img-fluid rounded" alt="Preview">
+           
+              
+              <!-- File input and upload button -->
+              <div class="custom-file">
+                <input class="form-control" type="file" class="custom-file-input" id="image-input" accept="image/*">
+              <br>
+              </div>
+                  <label for="exampleFormControlTextarea1" class="form-label">Caption:</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea><br>
+                
+               
+               
+          
+              </div>
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="upload-post-button">Upload post</button><br>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+            
+      
+      
+      <!-- Modal -->
+      <div class="modal fade" id="headerPreview" tabindex="-1" aria-labelledby="headerPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="headerPreviewLabel" style="color:white;">Header Preview</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+              <div class="headerText container" id="dynamicHeader">
+                <!-- Dynamic header content will be inserted here -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+            
+            
+            
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete News</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="newsContainer"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+            </div>
+          </div>
+        </div>
+      </div>
           
   
 

@@ -292,8 +292,12 @@ align-items: center;
   margin: top -1px;
   overflow: hidden;
   backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: space-evenly;
+width:80%;
+display: flex;
+flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   
 }
 
@@ -302,6 +306,15 @@ align-items: center;
   color:white;
   text-align: center;
 }
+
+/* Style for the common news column */
+.news-column {
+  padding: 0 5px;
+  width: 100%;
+}
+
+
+
 
 @media(min-width:991px){
   .newsCard{
@@ -635,6 +648,7 @@ color:white; }
  background-attachment: fixed;
 }
 
+
 .newsPanelContainer3{
   width:70%;
   min-height:1200px;
@@ -936,6 +950,19 @@ align-items: center;
   padding-top: 60px;
   overflow: auto;
 }
+/* style.css */
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+
 
 .modal-content {
   background-color: #fefefe;
