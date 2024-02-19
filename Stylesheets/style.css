@@ -1070,3 +1070,7 @@ align-items: center;
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.adminStyle{
+  color:white;
+}

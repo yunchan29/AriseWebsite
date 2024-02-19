@@ -600,6 +600,36 @@ document.getElementById('upload-post-button').addEventListener('click', function
   createPost(); // Call the createPost function when the button is clicked
 });
 
+function deletePost(postId, imageUrl) {
+  // Delete the post document from Firestore
+  const postRef = doc(db, 'posts', postId);
+  deleteDoc(postRef)
+    .then(() => {
+      console.log('Post deleted from Firestore:', postId);
+    })
+    .catch((error) => {
+      console.error('Error deleting post from Firestore:', error);
+    });
+
+  // Delete the image from Firebase Storage
+  const storage = getStorage(app);
+  const imageRef = ref(storage, imageUrl);
+
+  deleteObject(imageRef)
+    .then(() => {
+      console.log('Image deleted from Storage:', imageUrl);
+    })
+    .catch((error) => {
+      console.error('Error deleting image from Storage:', error);
+    });
+}
+
+// Example usage:
+// Call this function with the post ID and image URL when you want to delete a post.
+// For example, when a "Delete" button is clicked in your UI.
+// deletePost('yourPostId', 'yourImageUrl');
+
+
   
 // Fetch and display posts function
 async function fetchAndDisplayPosts() {
@@ -659,7 +689,6 @@ function displayPosts(posts) {
     return;
   }
 
-  // Display each post
   posts.forEach((post) => {
     const postDiv = document.createElement('div');
     const postId = post.id;
@@ -673,19 +702,33 @@ function displayPosts(posts) {
           <p style="margin-left:20%;">${post.caption}</p>
           <img style="border-radius:20px; margin:10px;" src="${post.imageUrl}" alt="Post Image"><br>
           <div class="postBtn">
-          <a class="btn btn-primary">Like 👍</a>
-          <a class="btn btn-success">Comment 💭</a>
+            <a class="btn btn-primary">Like 👍</a>
+            <a class="btn btn-success">Comment 💭</a>
+            <button class="btn btn-danger delete-post-btn" data-post-id="${postId}">Delete 🗑️</button>
           </div>
       </div>
     `;
+
+    // Attach event listener to the delete button
+    const deleteBtn = postDiv.querySelector('.delete-post-btn');
+    deleteBtn.addEventListener('click', () => {
+      const confirmDelete = confirm('Are you sure you want to delete this post?');
+      if (confirmDelete) {
+        const imageUrl = post.imageUrl;
+        deletePost(postId, imageUrl);
+        // Optionally, you can remove the post from the UI immediately
+        postDiv.remove();
+      }
+    });
+
     postsContainer.appendChild(postDiv);
   });
 }
 
+// Trigger the fetchAndDisplayPosts function
 document.addEventListener("DOMContentLoaded", function () {
   fetchAndDisplayPosts();
 });
-
 
 //fetchHeader
 
